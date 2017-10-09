@@ -6,5 +6,8 @@
   "repository": "git@github.com:multi-cell/devise-ante",
   "author": "Graham Barber <grahammbarber@gmail.com>",
   "license": "Apache-2.0",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "commitizen": "^2.9.6"
+  }
 }
