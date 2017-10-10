@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Frontend for Devise",
   "main": "index.js",
+  "scripts": {
+    "commit": "git-cz"
+  },
   "repository": "git@github.com:multi-cell/devise-ante",
   "author": "Graham Barber <grahammbarber@gmail.com>",
   "license": "Apache-2.0",
