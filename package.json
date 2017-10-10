@@ -8,6 +8,12 @@
   "license": "Apache-2.0",
   "private": true,
   "devDependencies": {
-    "commitizen": "^2.9.6"
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
