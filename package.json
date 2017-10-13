@@ -6,7 +6,10 @@
   "scripts": {
     "commit": "git-cz",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test:lint": "standard --fix",
+    "test:format": "prettier-standard src/**/*.js",
+    "test": "run-s test:**"
   },
   "repository": "git@github.com:multi-cell/devise-ante",
   "author": "Graham Barber <grahammbarber@gmail.com>",
@@ -38,6 +41,7 @@
     "html-webpack-plugin": "^2.29.0",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
     "postcss-loader": "^2.0.6",
     "prettier-standard": "^7.0.1",
     "rimraf": "^2.6.1",

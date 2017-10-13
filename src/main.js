@@ -5,6 +5,7 @@ import AtUI from 'at-ui'
 
 Vue.use(AtUI)
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   ...App
