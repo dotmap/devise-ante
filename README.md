@@ -5,29 +5,32 @@
 
 <!-- ![Logo of the project](./images/logo.sample.png) -->
 
-# Name of the project
-> Additional information or tag line
+# devise
+> Make great game documentation
 
-A brief description of your project, what it is used for.
+Devise is a web application for making easily-searchable, presentable, modular game documentation.
 
-## Installing / Getting started
+## Installing / Getting Started
 
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
-
-```shell
-commands here
-```
-
-Here you should say what actually happens when you execute the code above.
+Currently, there isn't a way to just install the app to use in production, but we'll get there (I promise!).
 
 ## Developing
 
 ### Built With
-List main libraries, frameworks used including versions (React, Angular etc...)
+
+Devise relies on the following technologies:
+
++ Vue
++ Vuex
++ GraphQL/Graphcool
++ Apollo
++ AT-UI
 
 ### Prerequisites
-What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
+You'll need two things:
+
++ [Node Current](https://nodejs.org/en/)
++ A [Graphcool](https://www.graph.cool/) account
 
 
 ### Setting up Dev
@@ -36,74 +39,82 @@ Here's a brief intro about what a developer must do in order to start developing
 the project further:
 
 ```shell
-git clone https://github.com/your/your-project.git
-cd your-project/
-packagemanager install
+# Download the project
+git clone https://github.com/multi-cell/devise.git
+cd devise/
+
+# Install dependencie with a manager of your choice
+npm install
+# OR
+yarn
 ```
 
-And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here.
+That should be everything you need to get up and running for development.
 
 ### Building
 
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. for example:
+Building the application is pretty simple:
 
 ```shell
-./configure
-make
-make install
+# Build and launch server for development
+npm run dev
+
+# Or, build for production
+npm run build
 ```
 
-Here again you should state what actually happens when the code above gets
-executed.
+Devise is built using webpack, and has different options for development and production.
 
-### Deploying / Publishing
-give instructions on how to build and release a new version
-In case there's some step you have to take that publishes this project to a
-server, this is the right time to state it.
+#### Development
 
-```shell
-packagemanager deploy your-project -s server.com -u username -p password
-```
+We use webpack-dev-server for hot-module replacement. While it's up and running, you have access to the following cool tools:
 
-And again you'd need to tell what the previous code actually does.
++ [webpack-dashboard](https://github.com/FormidableLabs/electron-webpack-dashboard). Install the desktop app and see the magic!
++ [Friendly webpack errors](https://www.npmjs.com/package/friendly-errors-webpack-plugin). Actually understand what the problem is!
++ Desktop notifications, for when your build fails.
+
+#### Production
+
+When building for production, we'll minify the code and such. It's not too special. You'll find the output in the `dist` directory.
 
 ## Versioning
 
-We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
-
+We use [SemVer](http://semver.org/) for versioning. Or, we will, when we get to that point.
 
 ## Configuration
 
-Here you should write what are all of the configurations a user can enter when
-using the project.
+More info to come.
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
-Explain what these tests test and why.
-
-```shell
-Give an example
-```
+Still working on this.
 
 ## Style guide
 
-Explain your code style and show how to check it.
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
-## Api Reference
+That badge really says it all. You don't really need to worry about running formatting or linting commands; when you stage files and make a commit,
+`lint-staged` will make sure to lint your files and format them using `prettier-standard`. But, if you must know:
 
-If the api is external, link to api documentation. If not describe your api including authentication methods as well as explaining all the endpoints with their required parameters.
+```shell
+# Lint JS files
+npm run test:lint
 
+# Format JS files in src/
+npm run test:format
+```
+
+## API Reference
+
+The API for devise is found in another castle, which is still being built. Updates to come!
 
 ## Database
 
-Explaining what database (and version) has been used. Provide download links.
-Documents your database design and schemas, relations etc... 
+Currently, the database that this project uses is provided by Graphcool. We'll have instructions in the near future.
 
 ## Licensing
 
-State what the license is and how to find the text version of the license.
+This project is licensed under the Apache 2.0 license, which you can check out in the LICENSE file.
 
 ---
 
