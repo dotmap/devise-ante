@@ -63,15 +63,18 @@ workflows:
     jobs:
       - build
       - deploy_staging:
+          context: org-global
           requires: 
             - build
-          filter:
+          filters:
             branches:
               only: dev
       - deploy_prod:
+          type: approval
+          context: org-global
           requires:
             - build
-          filter:
+          filters:
             branches:
               only: master
 
