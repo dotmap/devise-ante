@@ -1,6 +1,3 @@
----
-layout: nil
----
 # Contributing to Devise
 
 First and foremost, thank you! We appreciate that you want to contribute to Devise, your time is valuable, and your contributions mean a lot to us.
