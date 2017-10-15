@@ -47,7 +47,7 @@ the project further:
 git clone https://github.com/multi-cell/devise.git
 cd devise/
 
-# Install dependencie with a manager of your choice
+# Install dependencies with a package manager of your choice
 npm install
 # OR
 yarn
@@ -71,7 +71,7 @@ Devise is built using webpack, and has different options for development and pro
 
 #### Development
 
-We use webpack-dev-server for hot-module replacement. While it's up and running, you have access to the following cool tools:
+We use webpack-dev-server for hot-module replacement. While it's up and running, you also have access to the following cool tools:
 
 + [webpack-dashboard](https://github.com/FormidableLabs/electron-webpack-dashboard). Install the desktop app and see the magic!
 + [Friendly webpack errors](https://www.npmjs.com/package/friendly-errors-webpack-plugin). Actually understand what the problem is!
@@ -118,7 +118,7 @@ Currently, the database that this project uses is provided by Graphcool. We'll h
 
 ## Licensing
 
-This project is licensed under the Apache 2.0 license, which you can check out in the LICENSE file.
+This project is licensed under the Apache 2.0 license, which you can check out in the [LICENSE](LICENSE) file.
 
 ---
 

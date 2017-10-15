@@ -1,6 +1,6 @@
 # Contributing to Devise
 
-First and foremost, thank you! We appreciate that you want to contribute to Devise, your time is valuable, and your contributions mean a lot to us.
+Hey, thank you so much. We appreciate that you want to contribute to Devise. Your time is valuable, and your contributions mean a lot to us.
 
 ## Important!
 
@@ -9,7 +9,7 @@ By contributing to this project, you:
 * Agree that you have authored 100% of the content
 * Agree that you have the necessary rights to the content
 * Agree that you have received the necessary permissions from your employer to make the contributions (if applicable)
-* Agree that the content you contribute may be provided under the Project license(s)
+* Agree that the content you contribute may be provided under the Project license
 
 ## Getting started
 
@@ -29,20 +29,21 @@ Please keep in mind that open source software is built by people like you, who s
 
 Don't have time to contribute? No worries, here are some other ways to show your support for Devise:
 
-- star the [project](https://github.com/multi-cell/devise-ante.git)
-- (more things soon)
+- Star the [project](https://github.com/multi-cell/devise-ante.git)
+- Shoutout the project on Twitter
+- Tell your friends and/or family all about us
 <!-- - tweet your support for <%= ask("name") %> -->
 
 ## Issues
 
 ### Before creating an issue
 
-Please try to determine if the issue is caused by an underlying library, and if so, create the issue there. Sometimes this is difficult to know. We only ask that you attempt to give a reasonable attempt to find out. Oftentimes the readme will have advice about where to go to create issues.
+Please try to determine if the issue is caused by an underlying library, and if so, create the issue there. Sometimes this is difficult to know. We only ask that you attempt to give a reasonable attempt to find out. Oftentimes the README will have advice about where to go to create issues.
 
-Try to follow these guidelines
+Try to follow these guidelines:
 
-- **Avoid creating issues for implementation help**. It's much better for discoverability, SEO, and semantics - to keep the issue tracker focused on bugs and feature requests - to ask implementation-related questions on [stackoverflow.com](so)
-- **Investigate the issue**:
+- **Avoid creating issues for implementation help**. It's much better for discoverability, SEO, and semantics to keep the issue tracker focused on bugs and feature requests. To ask implementation-related questions, post on [stackoverflow.com](so)
+- **Investigate the issue**: The more you can find out about the origins of the issue, the easier it is for us to fix it. Do some basic debugging to give us an edge over broken code.
 - **Check the README** - oftentimes you will find notes about creating issues, and where to go depending on the type of issue.
 - Create the issue in the appropriate repository.
 
@@ -63,7 +64,6 @@ The original poster or the maintainer's of Devise may close an issue at any time
 - An issue is clearly a duplicate of another issue, in which case the duplicate issue will be linked.
 - A discussion has clearly run its course
 
-
 ## Next steps
 
 **Tips for creating idiomatic issues**
@@ -79,8 +79,8 @@ The following resources were hand-picked to help you be the most effective contr
 
 At the very least, please try to:
 
-- Use backticks to wrap code. This ensures that it retains its formatting and isn't modified when it's rendered by GitHub, and makes the code more readable to others
-- When applicable, use syntax highlighting by adding the correct language name after the first "code fence"
+- Use backticks to wrap code. This ensures that it retains its formatting and isn't modified when it's rendered by GitHub, and makes the code more readable to others.
+- When applicable, use syntax highlighting by adding the correct language name after the first "code fence".
 
 
 [so]: http://stackoverflow.com/questions/tagged/devise
