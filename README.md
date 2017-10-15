@@ -13,13 +13,10 @@ Devise is a web application for making easily-searchable, presentable, modular g
 ## Installing / Getting Started
 
 Currently, there isn't a way to just install the app to use in production, but we'll get there (I promise!).
-<<<<<<< HEAD
 
 ## Developing
 
 ### Contributing
-=======
->>>>>>> 6b6c1f3... docs(readme): Added README content
 
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE-OF-CONDUCT.md). By participating in this project you agree to abide by its terms.
 
