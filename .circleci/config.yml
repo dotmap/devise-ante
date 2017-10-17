@@ -63,7 +63,7 @@ jobs:
       - image: circleci/node:8
     working_directory: ~/repo
     steps:
-      - checokut
+      - checkout
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
