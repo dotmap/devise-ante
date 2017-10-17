@@ -33,12 +33,10 @@ jobs:
           # Fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: yarn
-      - run: npm install -g now-cli
       - run: yarn build
       - run: |
-          cd dist
-          rm bundle.js.map
-          now -p -t $NOW_TOKEN -T multi-cell -n devise-staging
+          rm dist/build.js.map
+          npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise-staging
 
   deploy_prod:
     docker:
@@ -52,12 +50,10 @@ jobs:
           # Fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: yarn
-      - run: npm install -g now-cli
       - run: yarn build
       - run: |
-          cd dist
-          rm bundle.js.map
-          now -p -C -t $NOW_TOKEN -T multi-cell -n devise
+          rm dist/build.js.map
+          npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise
 
 workflows:
   version: 2
@@ -79,4 +75,3 @@ workflows:
           filters:
             branches:
               only: master
-
