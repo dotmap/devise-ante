@@ -70,7 +70,6 @@ jobs:
           # Fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: yarn
-      - run: npm install now
       - run: yarn build
       - run: |
           cd dist
