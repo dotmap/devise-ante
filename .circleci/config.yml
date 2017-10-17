@@ -72,7 +72,7 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: |
-          rm dist/bundle.js.map
+          rm dist/build.js.map
           npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n test
 
 workflows:
