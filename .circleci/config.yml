@@ -72,9 +72,8 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: |
-          cd dist
-          rm bundle.js.map
-          npx now -p -C -t $NOW_TOKEN -T multi-cell -n test
+          rm dist/bundle.js.map
+          npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n test
 
 workflows:
   version: 2
