@@ -58,6 +58,24 @@ jobs:
           cd dist
           rm bundle.js.map
           now -p -C -t $NOW_TOKEN -T multi-cell -n devise
+  deploy_test:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/repo
+    steps:
+      - checokut
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # Fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: yarn
+      - run: npm install now
+      - run: yarn build
+      - run: |
+          cd dist
+          rm bundle.js.map
+          npx now -p -C -t $NOW_TOKEN -T multi-cell -n test
 
 workflows:
   version: 2
@@ -79,4 +97,7 @@ workflows:
           filters:
             branches:
               only: master
-
+      - deploy_test:
+          context: org-global
+          requires:
+            - build
