@@ -1,40 +1,52 @@
-<template>
-  <div class="container" id="app">
-    <div class="app">
-      <img src="./assets/logo.png">
-      <h1>Vue 2 & AT-UI</h1>
-      <at-button @click="handleClick">Thanks for choosing AT-UI </at-button>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
+  name: 'App',
   methods: {
-    handleClick () {
-      this.$Message('It works! We believe that you can save your time with AT-UI.')
+    onNav (name) {
+      this.$router.push({path: `/${name}`})
     }
   }
 }
 </script>
 
-<style lang="scss">
-  .container {
+<template>
+  <main>
+    <at-menu mode="horizontal" @on-select="onNav" :activeName="$route.name">
+      <span class="brand">devise</span>
+      <at-submenu>
+        <template slot="title">My Game</template>
+        <at-menu-item name="1">My Game</at-menu-item>
+        <at-menu-item name="2">Arcade Thing</at-menu-item>
+      </at-submenu>
+      <at-menu-item class="right" name="user"><i class="icon icon-user"></i>user</at-menu-item>
+    </at-menu>
+    <transition>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </main>
+</template>
+
+<style lang="scss" scoped>
+  main {
     width: 100%;
     height: 100%;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .app {
-    color: #2c3e50;
-    text-align: center;
-  }
-  h1, h2 {
-    font-weight: normal;
-    margin: 16px 0;
+    flex-flow: column;
+
+    .at-menu {
+      .brand {
+        position: relative;
+        float: left;
+        padding: 0 24px;
+        width: 240px;
+        background-color: rgba(200, 255, 200, 0.3);
+      }
+      .right {
+        float: right;
+      }
+    }
   }
 </style>

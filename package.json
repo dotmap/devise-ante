@@ -14,7 +14,11 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.js": ["standard --fix", "prettier-standard", "git add"]
+      "**/*.js": [
+        "standard --fix",
+        "prettier-standard",
+        "git add"
+      ]
     }
   },
   "repository": "git@github.com:multi-cell/devise-ante",
@@ -42,6 +46,7 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^3.13.1",
     "file-loader": "^0.11.2",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.29.0",
