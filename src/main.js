@@ -8,5 +8,5 @@ Vue.use(AtUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  ...App
+  render: h => h(App)
 })

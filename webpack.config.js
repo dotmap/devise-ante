@@ -28,11 +28,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
-      },
-      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
@@ -68,7 +63,8 @@ module.exports = {
   devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.ejs',
+      title: process.env.NODE_ENV === 'development' ? 'Devise Dev' : 'Devise'
     })
   ]
 }
