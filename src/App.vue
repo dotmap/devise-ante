@@ -1,6 +1,4 @@
 <script>
-import './fonts/Inter-UI-Regular.woff2'
-
 export default {
   name: 'App',
   methods: {
@@ -27,6 +25,11 @@ export default {
 </template>
 
 <style lang="scss">
+  @font-face {
+    font-family: 'Inter UI';
+    src: url('./fonts/Inter-UI-Regular.woff2');
+  }
+
   body {
     font-family: 'Inter UI';
   }
