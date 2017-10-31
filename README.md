@@ -7,6 +7,8 @@
 <!-- ![Logo of the project](./images/logo.sample.png) -->
 
 # devise
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/multi-cell/devise-ante.svg)](https://greenkeeper.io/)
 > Make great game documentation
 
 Devise is a web application for making easily-searchable, presentable, modular game documentation.
