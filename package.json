@@ -14,7 +14,11 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.js": ["standard --fix", "prettier-standard", "git add"]
+      "**/*.js": [
+        "standard --fix",
+        "prettier-standard",
+        "git add"
+      ]
     }
   },
   "repository": "git@github.com:multi-cell/devise-ante",
@@ -24,7 +28,8 @@
   "dependencies": {
     "at-ui": "^1.2.0-beta",
     "at-ui-style": "^1.3.2",
-    "vue": "^2.3.4"
+    "vue": "^2.3.4",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -42,6 +47,7 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^3.13.1",
     "file-loader": "^0.11.2",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.29.0",

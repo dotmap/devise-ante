@@ -1,3 +1,9 @@
 {
-  "extends": "standard"
+  "plugins": [
+    "vue"
+  ],
+  "extends": [
+    "standard",
+    "plugin:vue/recommended"
+  ]
 }
