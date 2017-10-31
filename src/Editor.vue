@@ -1,14 +1,15 @@
 <script>
 export default {
-  name: 'Editor'
+  name: 'Editor',
+  props: ['slug']
 }
 </script>
 
 <template>
   <div class="element-editor">
     <h1>Editor</h1>
-    <h2>game {{$route.params.game}}</h2>
-    <h2>element {{$route.params.id}}</h2>
+    <h2>{{$route.params.game}}</h2>
+    <h2>{{$props.slug}}</h2>
   </div>
 </template>
 

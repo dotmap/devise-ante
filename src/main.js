@@ -23,7 +23,11 @@ const router = new VueRouter({
       component: GameView,
       children: [
         { path: '', component: null, name: 'game' },
-        { path: ':id', component: Editor, name: 'editor' }
+        {
+          path: '*',
+          component: Editor,
+          props: route => ({ slug: route.params[0] })
+        }
       ]
     }
   ]
