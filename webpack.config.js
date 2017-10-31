@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const notifier = require('node-notifier')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MinifyPlugin = require('babel-minify-webpack-plugin')
 const WebpackDashboardPlugin = require('webpack-dashboard/plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
@@ -65,13 +66,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.ejs',
       title: process.env.NODE_ENV === 'development' ? 'Devise Dev' : 'Devise'
-    })
+    }),
+    new WebpackDashboardPlugin()
   ]
 }
 
 if (process.env.NODE_ENV === 'development') {
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new WebpackDashboardPlugin(),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
         messages: [
@@ -105,12 +106,7 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    new MinifyPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
