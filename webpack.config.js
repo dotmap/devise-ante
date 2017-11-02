@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const notifier = require('node-notifier')
+const CleanPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MinifyPlugin = require('babel-minify-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const WebpackDashboardPlugin = require('webpack-dashboard/plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
@@ -10,7 +12,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'build.js'
+    filename: 'build.[hash].js'
   },
   module: {
     rules: [
@@ -21,8 +23,10 @@ module.exports = {
             loader: 'vue-loader',
             options: {
               loaders: {
-                scss: 'vue-style-loader!css-loader!sass-loader',
-                sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+                scss: ExtractTextPlugin.extract({
+                  use: ['css-loader', 'postcss-loader', 'sass-loader'],
+                  fallback: 'vue-style-loader'
+                })
               }
             }
           }
@@ -30,7 +34,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'postcss-loader'],
+          fallback: 'style-loader'
+        })
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -63,11 +70,14 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
+    new ExtractTextPlugin({
+      disable: process.env.NODE_ENV !== 'production',
+      filename: 'styles.[contenthash].css'
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.ejs',
-      title: process.env.NODE_ENV === 'development' ? 'Devise Dev' : 'Devise'
-    }),
-    new WebpackDashboardPlugin()
+      title: process.env.NODE_ENV === 'production' ? 'Devise' : 'Devise Dev'
+    })
   ]
 }
 
@@ -94,13 +104,15 @@ if (process.env.NODE_ENV === 'development') {
           })
         }
       }
-    })
+    }),
+    new WebpackDashboardPlugin()
   ])
 }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   module.exports.plugins = (module.exports.plugins || []).concat([
+    new CleanPlugin(['dist']),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -109,6 +121,7 @@ if (process.env.NODE_ENV === 'production') {
     new MinifyPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ])
 }
