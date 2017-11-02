@@ -5,6 +5,7 @@ import 'at-ui-style'
 
 import App from './App.vue'
 import Editor from './Editor.vue'
+import GameNew from './GameNew.vue'
 import GameView from './GameView.vue'
 import GameSelect from './GameSelect.vue'
 import UserView from './UserView.vue'
@@ -18,6 +19,7 @@ const router = new VueRouter({
     { path: '*', redirect: '/' },
     { path: '/', component: GameSelect },
     { path: '/user', name: 'user', component: UserView },
+    { path: '/new', name: 'newgame', component: GameNew },
     {
       path: '/:game',
       component: GameView,
