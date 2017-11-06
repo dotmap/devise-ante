@@ -40,7 +40,6 @@ export default {
     width: 100%;
     height: 100%;
     font-family: 'Inter UI';
-
     display: flex;
     flex-flow: column;
 
@@ -52,9 +51,11 @@ export default {
         font-family: 'Nunito';
         font-size: 14pt;
       }
+
       .right {
         float: right;
       }
+
       .gamechoose {
         text-align: right;
       }

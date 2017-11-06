@@ -21,6 +21,7 @@ export default {
     margin: 4rem auto;
     text-align: center;
   }
+  
   a {
     display: block;
     border: 1px solid gray;

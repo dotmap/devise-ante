@@ -48,6 +48,7 @@ export default {
     width: 100%;
     display: flex;
   }
+  
   .at-menu {
     overflow-y: scroll;
   }
