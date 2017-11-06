@@ -1,6 +1,4 @@
 <script>
-import './fonts/Inter-UI-Regular.woff2'
-
 export default {
   name: 'App'
 }

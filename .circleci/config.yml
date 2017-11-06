@@ -34,9 +34,7 @@ jobs:
           - v1-dependencies-
       - run: yarn
       - run: yarn build
-      - run: |
-          rm dist/build.js.map
-          npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise-staging
+      - run: npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise-staging
 
   deploy_prod:
     docker:
@@ -51,9 +49,7 @@ jobs:
           - v1-dependencies-
       - run: yarn
       - run: yarn build
-      - run: |
-          rm dist/build.js.map
-          npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise
+      - run: npx now dist -p -C -t $NOW_TOKEN -T multi-cell -n devise
 
 workflows:
   version: 2
