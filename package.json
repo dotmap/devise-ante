@@ -7,14 +7,14 @@
     "cm": "git-cz",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "test:lint": "standard --fix **/*.{js,vue} | snazzy",
+    "test:lint": "eslint --fix **/*.{js,vue}",
     "test": "run-s test:**",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "linters": {
       "**/*.{js,vue}": [
-        "standard --fix",
+        "eslint --fix",
         "git add"
       ]
     }
@@ -40,11 +40,11 @@
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^3.13.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -58,8 +58,6 @@
     "prettier-standard": "^7.0.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.3",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.0.0",
@@ -73,10 +71,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "standard": {
-    "plugins": [
-      "html"
-    ]
   }
 }
