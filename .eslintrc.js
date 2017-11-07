@@ -1,10 +1,11 @@
 module.exports = {
   'plugins': [
-    'html',
+    'vue',
     'standard'
   ],
   'extends': [
-    'standard'
+    'standard',
+    'plugin:vue/recommended'
   ],
   'parserOptions': {
     'ecmaVersion': 8,
