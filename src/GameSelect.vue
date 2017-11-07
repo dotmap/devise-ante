@@ -7,12 +7,7 @@ export default {
 <template>
   <div>
     <h1>GameSelect</h1>
-    <router-link class="at-btn at-btn--default" :to="{ name: 'game', params: {game: 'please-stop'} }">
-      <span class="at-btn__text">Game 1</span>
-    </router-link>
-    <router-link class="at-btn at-btn--default" :to="{ name: 'game', params: {game: 'ugh-please-no'} }">
-      <span class="at-btn__text">Game 2</span>
-    </router-link>
+    <h2>Just use the menu above.</h2>
   </div>
 </template>
 

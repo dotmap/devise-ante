@@ -1,15 +1,19 @@
 <script>
 export default {
   name: 'Editor',
-  props: ['slug']
+  props: ['game', 'slug'],
+  computed: {
+    element () { return this.$store.getters.element(this.$props.game, this.$props.slug) },
+    name () { return this.element && this.element.name },
+    text () { return this.element && this.element.text }
+  }
 }
 </script>
 
 <template>
   <div class="element-editor">
-    <h1>Editor</h1>
-    <h2>{{$route.params.game}}</h2>
-    <h2>{{$props.slug}}</h2>
+    <at-input :value="name"></at-input>
+    <at-textarea :value="text" :minRows="4"></at-textarea>
   </div>
 </template>
 

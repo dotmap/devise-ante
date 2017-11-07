@@ -1,14 +1,10 @@
 <script>
 export default {
   name: 'GameView',
-  methods: {
-    onElementNav (slug) {
-      const {game} = this.$route.params
-      this.$router.push(`/${game}/${slug}`)
-    },
-    getElementName () {
-      const {id} = this.$route.params
-      return id
+  props: ['game'],
+  computed: {
+    elements () {
+      return this.$store.getters.elements(this.$props.game)
     }
   }
 }
@@ -16,29 +12,10 @@ export default {
 
 <template>
   <div class="view">
-
-    <at-menu @on-select="onElementNav" :activeName="getElementName()">
-      <at-menu-item name="chars/chris">Chris</at-menu-item>
-      <at-menu-item name="chars/linda">Linda</at-menu-item>
-      <at-menu-item name="alex">Alex</at-menu-item>
-      <at-menu-item name="chad">Chad</at-menu-item>
-      <at-menu-item name="graham">Grahamm</at-menu-item>
-      <at-menu-item name="home">Home</at-menu-item>
-      <at-menu-item name="store">Store</at-menu-item>
-      <at-menu-item name="town">Town</at-menu-item>
-      <at-menu-item name="city">City</at-menu-item>
-      <at-menu-item name="neotokyo">Neotokyo</at-menu-item>
-      <at-menu-item name="caves">Caves</at-menu-item>
-      <at-menu-item name="hub">Hub</at-menu-item>
-      <at-menu-item name="fish">Fish</at-menu-item>
-      <at-menu-item name="steel">Steel Ingot</at-menu-item>
-      <at-menu-item name="stick">Stick</at-menu-item>
-      <at-menu-item name="food">A Food</at-menu-item>
-      <at-menu-item name="saveme">Please help me I'm trapped in a software development shop</at-menu-item>
+    <at-menu :router="true">
+      <at-menu-item v-for="e in elements" :key="e.slug" :to="{ path: `/${$props.game}/${e.slug}` }">{{e.name}}</at-menu-item>
     </at-menu>
-
     <router-view></router-view>
-
   </div>
 </template>
 
