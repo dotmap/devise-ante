@@ -9,8 +9,8 @@ import App from './App.vue'
 import Editor from './Editor.vue'
 import GameNew from './GameNew.vue'
 import GameView from './GameView.vue'
-import GameSelect from './GameSelect.vue'
 import UserView from './UserView.vue'
+import NewElementFrame from './elements/new-frame.vue'
 
 slugify.extend({ '!': 'bang' })
 slugify.extend({ '@': 'at' })
@@ -37,6 +37,11 @@ const store = new Vuex.Store({
             slug: 'the-hedge',
             name: 'The Hedge',
             text: 'This is some example text about the Hedge.'
+          },
+          {
+            slug: 'keepers',
+            name: 'Keepers',
+            text: `They'll kidnap you and git you rekt.`
           }
         ]
       }
@@ -44,10 +49,12 @@ const store = new Vuex.Store({
   },
   getters: {
     games: s => s.games,
-    elements: (state, get) => slug =>
-      state.games.find(g => g.slug === slug).elements,
-    element: (state, get) => (game, slug) =>
-      get.elements(game).find(e => e.slug === slug)
+    game: (state, get) => slug => {
+      return state.games.find(g => g.slug === slug)
+    },
+    element: (state, get) => (game, slug) => {
+      return get.game(game).elements.find(e => e.slug === slug)
+    }
   },
   actions: {},
   mutations: {}
@@ -57,7 +64,7 @@ const router = new VueRouter({
   mode: 'hash',
   routes: [
     { path: '*', redirect: '/' },
-    { path: '/', component: GameSelect },
+    { path: '/', component: null },
     { path: '/user', name: 'user', component: UserView },
     { path: '/new', name: 'newgame', component: GameNew },
     {
@@ -66,6 +73,7 @@ const router = new VueRouter({
       props: route => ({ game: route.params.game }),
       children: [
         { path: '', component: null, name: 'game' },
+        { path: 'new', component: NewElementFrame, name: 'newelement' },
         {
           path: '*',
           component: Editor,
