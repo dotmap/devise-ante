@@ -6,11 +6,11 @@ import 'at-ui-style'
 import slugify from 'slugify'
 
 import App from './App.vue'
-import Editor from './Editor.vue'
-import GameNew from './GameNew.vue'
-import GameView from './GameView.vue'
-import UserView from './UserView.vue'
-import NewElement from './elements/new.vue'
+import Dashboard from './user/Dashboard.vue'
+import Game from './games/Game.vue'
+import NewGame from './games/NewGame.vue'
+import EditElement from './games/elements/EditElement.vue'
+import NewElement from './games/elements/NewElement.vue'
 
 slugify.extend({ '!': 'bang' })
 slugify.extend({ '@': 'at' })
@@ -31,20 +31,16 @@ const router = new VueRouter({
   routes: [
     { path: '*', redirect: '/' },
     { path: '/', component: null },
-    { path: '/user', name: 'user', component: UserView },
-    { path: '/new', name: 'newgame', component: GameNew },
+    { path: '/user', name: 'user', component: Dashboard },
+    { path: '/new', name: 'newgame', component: NewGame },
     {
       path: '/:game',
-      component: GameView,
-      props: route => ({ game: route.params.game }),
+      component: Game,
+      props: true,
       children: [
         { path: '', component: null, name: 'game' },
         { path: 'new', component: NewElement, name: 'newelement' },
-        {
-          path: '*',
-          component: Editor,
-          props: route => ({ game: route.params.game, slug: route.params[0] })
-        }
+        { path: ':slug', component: EditElement, props: true }
       ]
     }
   ]
@@ -54,18 +50,18 @@ const store = new Vuex.Store({
   state: {
     games: [
       {
-        slug: 'example-game',
-        name: 'Example Game',
+        slug: 'zero-point',
+        name: 'Zero Point',
         elements: [
           {
-            slug: 'the-hedge',
-            name: 'The Hedge',
-            text: 'This is some example text about the Hedge.'
+            slug: 'player-rovs',
+            name: 'ROVs',
+            text: `Remotely operated vehicles are the player's eyes and ears. Most actions in the game will done through an ROV--it is much safer than risking their own life exploring ships and structures.`
           },
           {
-            slug: 'keepers',
-            name: 'Keepers',
-            text: `They'll kidnap you and git you rekt.`
+            slug: 'levels-ships',
+            name: 'Ships',
+            text: `Spaceships are the primary living space of space-faring folk. See the rules about rooms and airlocks to create levels.`
           }
         ]
       }
@@ -76,19 +72,34 @@ const store = new Vuex.Store({
     game: (state, get) => slug => {
       return state.games.find(g => g.slug === slug)
     },
+    gameName: (state, get) => slug => {
+      const game = get.game(slug)
+      return game && game.name
+    },
     element: (state, get) => (game, slug) => {
       return get.game(game).elements.find(e => e.slug === slug)
     }
   },
-  actions: {},
-  mutations: {}
+  actions: {
+    createElement ({ commit }, { game, slug, name, text }) {
+      commit('addElement', { game, slug, name, text })
+    }
+  },
+  mutations: {
+    addElement (state, { game, slug, name, text }) {
+      const gameInst = state.games.find(g => g.slug === game)
+      if (gameInst.elements.find(e => e.slug === slug)) { throw new Error('Slug taken!') }
+      gameInst.elements.push({ slug, name, text })
+      return state
+    }
+  }
 })
 
 const app = new Vue({
   el: '#app',
-  store,
   router,
+  store,
   render: h => h(App)
 })
 
-export { app, store, router }
+export { app, router, store }

@@ -11,7 +11,7 @@ export default {
     }
   },
   computed: {
-    gameName () { return this.$store.getters.game(this.$props.game) },
+    gameName () { return this.$store.getters.game(this.game) },
     defaultSlug: data => slugify(data.name, {lower: true})
   }
 }
@@ -20,6 +20,7 @@ export default {
 <template>
   <div class="new-element">
     <h2>create element</h2>
+    <p>This is a markedly unique component of the game. A character, a place, technology from lore, or anything you could imagine needs to be described to other developers working the game.</p>
     <at-input v-model="name"></at-input>
     <code>{{slug || defaultSlug || 'slug-preview'}}</code>
     <at-button type="primary">create</at-button>

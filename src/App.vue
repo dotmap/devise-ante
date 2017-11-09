@@ -4,7 +4,8 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'App',
   computed: mapGetters([
-    'games'
+    'games',
+    'gameName'
   ])
 }
 </script>
@@ -15,7 +16,7 @@ export default {
       <span class="brand">devise</span>
       <at-menu-item class="right" replace :to="{ name: 'user' }"><i class="icon icon-user"></i>user</at-menu-item>
       <at-submenu class="right">
-        <template slot="title">{{$route.params.game || 'select a game'}}</template>
+        <template slot="title">{{gameName($route.params.game) || 'select a game'}}</template>
         <at-menu-item v-for="{name, slug} in games" :key="slug" replace :to="{ name: 'game', params: {game: slug} }">{{name}}</at-menu-item>
         <at-menu-item replace :to="{ name: 'newgame' }"><i class="icon icon-plus-circle"></i>new game</at-menu-item>
       </at-submenu>

@@ -1,5 +1,5 @@
 <script>
-import ElementNav from './list'
+import ElementNav from './elements/ElementNav.vue'
 
 export default {
   name: 'Game',
@@ -9,7 +9,7 @@ export default {
   },
   computed: {
     elements () {
-      return this.$store.getters.game(this.$props.game).elements
+      return this.$store.getters.game(this.game).elements
     }
   }
 }
@@ -17,7 +17,7 @@ export default {
 
 <template>
   <div class="view">
-    <element-nav :game="$prop.game" :elements="elements"></element-nav>
+    <element-nav :game="game" :elements="elements"></element-nav>
     <router-view></router-view>
   </div>
 </template>

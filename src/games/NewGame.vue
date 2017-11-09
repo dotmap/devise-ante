@@ -1,9 +1,8 @@
 <script>
-import {yesRandom, noRandom} from 'yes-no-words'
 import slugify from 'slugify'
 
 export default {
-  name: 'GameNew',
+  name: 'NewGame',
   data () {
     return {
       base: location.origin,
@@ -12,9 +11,7 @@ export default {
     }
   },
   computed: {
-    defaultSlug: s => slugify(s.name, {lower: true}),
-    yes: () => yesRandom(),
-    no: () => noRandom()
+    defaultSlug: s => slugify(s.name, {lower: true})
   }
 }
 </script>
@@ -25,8 +22,8 @@ export default {
     <p>This is a placeholder for some sort of explaination. We might explain how games should correspond to projects or recommend something.</p>
     <at-input v-model="name" placeholder="name your new game" size="large"></at-input>
     <code class="slug-preview">{{base}}/#/{{encodeURI(slug || defaultSlug)}}</code>
-    <at-button type="primary">{{yes}}</at-button>
-    <at-button>{{no}}</at-button>
+    <at-button type="primary">create</at-button>
+    <at-button>cancel</at-button>
   </div>
 </template>
 
