@@ -11,8 +11,8 @@ export default {
 
 <template>
   <div class="edit-element">
-    <at-input :value="name" placeholder="name"/>
-    <at-textarea :value="text" placeholder="description"/>
+    <el-input :value="name" placeholder="name"/>
+    <el-input :value="text" placeholder="description" type="textarea" autosize/>
   </div>
 </template>
 

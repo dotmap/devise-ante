@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss" scoped>
   .view {
-    height: calc(100% - 48px);
+    flex-grow: 1;
     width: 100%;
     display: flex;
   }

@@ -6,23 +6,51 @@ export default {
   computed: mapGetters([
     'games',
     'gameName'
-  ])
+  ]),
+  data () {
+    return {
+      dialogFormVisible: false,
+      form: {}
+    }
+  }
 }
 </script>
 
 <template>
-  <main>
-    <at-menu mode="horizontal" :router="true">
+  <div class="app">
+
+    <el-dialog title="create new game" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="display name">
+          <el-input v-model="form.name" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="slug">
+          <el-input v-model="form.slug" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+      </span>
+    </el-dialog>
+
+    <el-menu mode="horizontal" :router="true">
       <span class="brand">devise</span>
-      <at-menu-item class="right" replace :to="{ name: 'user' }"><i class="icon icon-user"></i>user</at-menu-item>
-      <at-submenu class="right">
-        <template slot="title">{{gameName($route.params.game) || 'select a game'}}</template>
-        <at-menu-item v-for="{name, slug} in games" :key="slug" replace :to="{ name: 'game', params: {game: slug} }">{{name}}</at-menu-item>
-        <at-menu-item replace :to="{ name: 'newgame' }"><i class="icon icon-plus-circle"></i>new game</at-menu-item>
-      </at-submenu>
-    </at-menu>
-    <router-view></router-view>
-  </main>
+      <el-menu-item index="dashboard" :route="{ name: 'dashboard' }">
+        <i class="icon icon-user"></i>me
+      </el-menu-item>
+      <el-submenu index="games">
+        <template slot="title">{{$route.params.game || 'select a game'}}</template>
+        <el-menu-item v-for="{name, slug} in games" :key="slug" :index="`game:${slug}`" :route="{ name: 'game', params: {game: slug} }">{{name}}</el-menu-item>
+        <el-menu-item index="newgame" :route="{name:'newgame'}"><i class="icon icon-plus-circle"></i>new game</el-menu-item>
+      </el-submenu>
+    </el-menu>
+
+    <router-view>
+      <!-- Everything below the top site nav -->
+    </router-view>
+
+  </div>
 </template>
 
 <style lang="scss">
@@ -32,26 +60,29 @@ export default {
   }
   body {
     font-family: 'Inter UI';
+    padding: 0;
+    margin: 0;
+  }
+  html, body {
+    height: 100%;
   }
 </style>
 
 <style lang="scss" scoped>
-  main {
+  .app {
     width: 100%;
     height: 100%;
-    font-family: 'Inter UI';
     display: flex;
     flex-flow: column;
-    .at-menu {
+    .el-menu {
       .brand {
-        position: relative;
-        float: left;
-        padding: 0 24px;
+        padding: 1rem 24px 0 24px;
         font-family: 'Nunito';
         font-size: 14pt;
-      }
-      .right {
-        float: right;
+        position: relative;
+        float: left;
+        height: 60px;
+        box-sizing: border-box;
       }
     }
   }

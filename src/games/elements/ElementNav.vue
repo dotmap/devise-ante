@@ -6,18 +6,21 @@ export default {
 </script>
 
 <template>
-  <at-menu :router="true">
-    <at-menu-item-group title="elements">
-      <at-menu-item v-for="e in elements" :key="e.slug" :to="{ path: `/${$props.game}/${e.slug}` }">{{e.name}}</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="actions">
-      <at-menu-item :to="{ name: 'newelement' }"><i class="icon icon-plus-circle"></i>new element</at-menu-item>
-    </at-menu-item-group>
-  </at-menu>
+  <el-menu :router="true">
+    <el-menu-item-group title="elements">
+      <el-menu-item v-for="e in elements" :key="e.slug" :route="{name: 'edit', params: {game, slug: e.slug}}" :index="e.slug">{{e.name}}</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="actions">
+      <el-menu-item :route="{ name: 'newelement' }" index="newelement"><i class="icon icon-plus-circle"></i>new element</el-menu-item>
+    </el-menu-item-group>
+  </el-menu>
 </template>
 
 <style lang="scss" scoped>
-  .at-menu {
+  .el-menu {
     overflow-y: scroll;
+    width: 240px;
+    box-sizing: border-box;
+    position: relative;
   }
 </style>

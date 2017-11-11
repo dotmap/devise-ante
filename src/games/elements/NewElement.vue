@@ -13,6 +13,15 @@ export default {
   computed: {
     gameName () { return this.$store.getters.game(this.game) },
     defaultSlug: data => slugify(data.name, {lower: true})
+  },
+  methods: {
+    create () {
+      console.log(this)
+      const {game} = this.$props
+      const {name} = this
+      const slug = this.slug || this.defaultSlug
+      this.$store.dispatch('createElement', {game, slug, name, text: ''})
+    }
   }
 }
 </script>
@@ -21,11 +30,11 @@ export default {
   <div class="new-element">
     <h2>create element</h2>
     <p>This is a markedly unique component of the game. A character, a place, technology from lore, or anything you could imagine needs to be described to other developers working the game.</p>
-    <at-input v-model="name"></at-input>
+    <el-input v-model="name"></el-input>
     <code>{{slug || defaultSlug || 'slug-preview'}}</code>
-    <at-button type="primary">create</at-button>
-    <at-button><i class="icon icon-hash"></i></at-button>
-    <at-button>cancel</at-button>
+    <el-button type="primary" :disabled="!name" @click="create">create</el-button>
+    <el-button><i class="icon icon-hash"></i></el-button>
+    <el-button>cancel</el-button>
   </div>
 </template>
 

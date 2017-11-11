@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-import AtUI from 'at-ui'
-import 'at-ui-style'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import slugify from 'slugify'
 
 import App from './App.vue'
@@ -24,23 +24,23 @@ slugify.extend({ '=': 'is' })
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
-Vue.use(AtUI)
+Vue.use(ElementUI)
 
 const router = new VueRouter({
   mode: 'hash',
   routes: [
     { path: '*', redirect: '/' },
     { path: '/', component: null },
-    { path: '/user', name: 'user', component: Dashboard },
+    { path: '/me', name: 'dashboard', component: Dashboard },
     { path: '/new', name: 'newgame', component: NewGame },
     {
-      path: '/:game',
+      path: '/g/:game',
       component: Game,
       props: true,
       children: [
         { path: '', component: null, name: 'game' },
-        { path: 'new', component: NewElement, name: 'newelement' },
-        { path: ':slug', component: EditElement, props: true }
+        { path: 'new', component: NewElement, props: true, name: 'newelement' },
+        { path: ':slug', component: EditElement, props: true, name: 'edit' }
       ]
     }
   ]
@@ -87,8 +87,11 @@ const store = new Vuex.Store({
   },
   mutations: {
     addElement (state, { game, slug, name, text }) {
+      console.log(game, slug, name, text)
       const gameInst = state.games.find(g => g.slug === game)
-      if (gameInst.elements.find(e => e.slug === slug)) { throw new Error('Slug taken!') }
+      if (gameInst.elements.find(e => e.slug === slug)) {
+        throw new Error('Slug taken!')
+      }
       gameInst.elements.push({ slug, name, text })
       return state
     }

@@ -20,10 +20,10 @@ export default {
   <div class="newgame view">
     <h1>create a new game</h1>
     <p>This is a placeholder for some sort of explaination. We might explain how games should correspond to projects or recommend something.</p>
-    <at-input v-model="name" placeholder="name your new game" size="large"></at-input>
-    <code class="slug-preview">{{base}}/#/{{encodeURI(slug || defaultSlug)}}</code>
-    <at-button type="primary">create</at-button>
-    <at-button>cancel</at-button>
+    <el-input v-model="name" placeholder="name your new game" size="large"></el-input>
+    <code class="slug-preview">{{base}}/#/{{slug || defaultSlug}}</code>
+    <el-button type="primary">create</el-button>
+    <el-button>cancel</el-button>
   </div>
 </template>
 
