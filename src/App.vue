@@ -1,12 +1,6 @@
 <script>
-import {mapGetters} from 'vuex'
-
 export default {
   name: 'App',
-  computed: mapGetters([
-    'games',
-    'gameName'
-  ]),
   data () {
     return {
       dialogFormVisible: false,
@@ -36,13 +30,13 @@ export default {
 
     <el-menu mode="horizontal" :router="true">
       <span class="brand">devise</span>
-      <el-menu-item index="dashboard" :route="{ name: 'dashboard' }">
-        <i class="icon icon-user"></i>me
+      <el-menu-item index="dashboard" :route="{name:'dashboard'}" class="right">
+        dashboard
       </el-menu-item>
-      <el-submenu index="games">
-        <template slot="title">{{$route.params.game || 'select a game'}}</template>
-        <el-menu-item v-for="{name, slug} in games" :key="slug" :index="`game:${slug}`" :route="{ name: 'game', params: {game: slug} }">{{name}}</el-menu-item>
-        <el-menu-item index="newgame" :route="{name:'newgame'}"><i class="icon icon-plus-circle"></i>new game</el-menu-item>
+      <el-submenu index="games" class="right">
+        <template slot="title">{{$route.params.game||'select a game'}}</template>
+        <el-menu-item index="game:vacuum" :route="{name:'game',params:{game:'vacuum'}}">Vacuum</el-menu-item>
+        <el-menu-item index="newgame" :route="{name:'newgame'}"><i class="el-icon-circle-plus"></i>new game</el-menu-item>
       </el-submenu>
     </el-menu>
 
@@ -83,6 +77,9 @@ export default {
         float: left;
         height: 60px;
         box-sizing: border-box;
+      }
+      .right {
+        float: right;
       }
     }
   }

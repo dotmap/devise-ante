@@ -26,13 +26,10 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "at-ui": "^1.2.1",
-    "at-ui-style": "^1.4.0",
     "element-ui": "^2.0.4",
     "slugify": "^1.2.1",
     "vue": "^2.5.3",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
