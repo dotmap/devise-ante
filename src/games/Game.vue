@@ -74,5 +74,7 @@ export default {
     flex-grow: 1;
     width: 100%;
     display: flex;
+    // necessary for router-view's vertical scrolling
+    height: calc(100% - 61px);
   }
 </style>
