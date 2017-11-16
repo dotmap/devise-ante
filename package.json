@@ -2,7 +2,10 @@
   "name": "devise-ante",
   "version": "0.0.0",
   "description": "Frontend for Devise",
-  "main": "index.js",
+  "repository": "multi-cell/devise-ante",
+  "author": "Graham Barber <grahammbarber@gmail.com>",
+  "license": "Apache-2.0",
+  "private": true,
   "scripts": {
     "cm": "git-cz",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
@@ -21,10 +24,6 @@
       ]
     }
   },
-  "repository": "git@github.com:multi-cell/devise-ante",
-  "author": "Graham Barber <grahammbarber@gmail.com>",
-  "license": "Apache-2.0",
-  "private": true,
   "dependencies": {
     "element-ui": "^2.0.4",
     "slugify": "^1.2.1",
