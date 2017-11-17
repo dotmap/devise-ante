@@ -260,6 +260,12 @@ async-foreach@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/async-foreach/-/async-foreach-0.1.3.tgz#36121f845c0578172de419a97dbeb1d16ec34542"
 
+async-validator@~1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.8.1.tgz#6665788ca39269af770e5ee02f0e557f2438d2ca"
+  dependencies:
+    babel-runtime "6.x"
+
 async@^1.4.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -273,19 +279,6 @@ async@^2.1.2, async@^2.1.5, async@^2.4.1:
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
-
-at-ui-style@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/at-ui-style/-/at-ui-style-1.3.2.tgz#223edb32f3b3f0c07d028d8143041e4922358cb9"
-
-at-ui@^1.2.0-beta:
-  version "1.2.0-beta.2"
-  resolved "https://registry.yarnpkg.com/at-ui/-/at-ui-1.2.0-beta.2.tgz#92ba973964f8af8a7c02524e505e5f061251714e"
-  dependencies:
-    vue "^2.3.4"
-    vue-i18n "^7.1.1"
-    vue-router "^2.5.3"
-    vue-template-compiler "^2.3.4"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -536,6 +529,10 @@ babel-helper-replace-supers@^6.24.1:
 babel-helper-to-multiple-sequence-expressions@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/babel-helper-to-multiple-sequence-expressions/-/babel-helper-to-multiple-sequence-expressions-0.2.0.tgz#d1a419634c6cb301f27858c659167cfee0a9d318"
+
+babel-helper-vue-jsx-merge-props@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.2.tgz#aceb1c373588279e2755ea1cfd35c22394fd33f8"
 
 babel-helpers@^6.24.1:
   version "6.24.1"
@@ -1046,7 +1043,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
+babel-runtime@6.x, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -2065,6 +2062,10 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
 
+deepmerge@^1.2.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
+
 define-properties@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
@@ -2257,6 +2258,15 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.24:
 elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
+
+element-ui@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.0.4.tgz#ebb4623eb1aabc1f53ce91a42839a5ec259e4dac"
+  dependencies:
+    async-validator "~1.8.1"
+    babel-helper-vue-jsx-merge-props "^2.0.0"
+    deepmerge "^1.2.0"
+    throttle-debounce "^1.0.1"
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -6174,6 +6184,10 @@ slice-ansi@1.0.0:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
 
+slugify@^1.2.1:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.2.4.tgz#8f52cf264068a71e991459bd2aa7a2b6cd87f868"
+
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
@@ -6599,6 +6613,10 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
+throttle-debounce@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-1.0.1.tgz#dad0fe130f9daf3719fdea33dc36a8e6ba7f30b5"
+
 through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -6886,10 +6904,6 @@ vue-hot-reload-api@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.0.tgz#9a21b35ced3634434a43ee80efb7350ea8fb206d"
 
-vue-i18n@^7.1.1:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-7.3.1.tgz#62930f0f229d4ba467209140f15b664539c1794b"
-
 vue-loader@^13.0.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-13.3.0.tgz#3bf837d490ba5dea6fc07e0835ffa6c688c8af33"
@@ -6908,10 +6922,6 @@ vue-loader@^13.0.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-router@^2.5.3:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.8.0.tgz#69df774c512112cd13e4748588861e27e0d0a9bc"
-
 vue-router@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
@@ -6923,9 +6933,9 @@ vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.3.4:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.0.tgz#2e138f1643e131f24f6e19733690713b7543a937"
+vue-template-compiler@^2.5.3:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.4.tgz#e104a80b69afbf37b56e0f2f91ff2037976e6d06"
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -6934,9 +6944,9 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.3.4:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.0.tgz#7f0706c0804257e8d42e5970e1a36e648483988d"
+vue@^2.5.3:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.4.tgz#4405e30b856875553e8fadb0ebf50f51ffc443f5"
 
 watchpack@^1.4.0:
   version "1.4.0"
