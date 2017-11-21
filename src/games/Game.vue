@@ -27,7 +27,16 @@ export default {
     ElementNav,
     EditElement
   },
-  props: ['game', 'slug'],
+  props: {
+    game: {
+      type: String,
+      required: true
+    },
+    slug: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       elements: load()

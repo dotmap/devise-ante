@@ -1,7 +1,12 @@
 <script>
 export default {
   name: 'EditElement',
-  props: ['markdown'],
+  props: {
+    markdown: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     input (value) {
       this.$emit('edit', value)

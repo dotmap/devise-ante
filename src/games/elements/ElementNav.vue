@@ -1,7 +1,16 @@
 <script>
 export default {
   name: 'ElementNav',
-  props: ['game', 'elements'],
+  props: {
+    game: {
+      type: String,
+      required: true
+    },
+    elements: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       askingAbout: null,

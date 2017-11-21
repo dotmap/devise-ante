@@ -3,7 +3,12 @@ import slugify from 'slugify'
 
 export default {
   name: 'NewElement',
-  props: ['game'],
+  props: {
+    game: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       title: '',
