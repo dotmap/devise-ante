@@ -2,7 +2,7 @@
 export default {
   name: 'ElementNav',
   props: {
-    game: {
+    gameId: {
       type: String,
       required: true
     },
@@ -30,11 +30,11 @@ export default {
     <el-menu :router="true">
       <span
         v-for="e in elements"
-        :key="e.slug"
+        :key="e.id"
         @contextmenu.prevent="open(e)">
         <el-menu-item
-          :index="e.slug"
-          :route="{name: 'element', params: {game, slug: e.slug}}">
+          :index="`e:${e.id}`"
+          :route="{name: 'game', params: {gameId, id: e.id}}">
           {{e.title}}
         </el-menu-item>
       </span>

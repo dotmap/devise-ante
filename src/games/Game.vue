@@ -12,48 +12,50 @@ export default {
     EditElement
   },
   props: {
-    game: {
+    gameId: {
       type: String,
       required: true
     },
-    slug: {
+    id: {
       type: String,
       required: false
     }
   },
   data () {
     return {
-      elements: load()
+      localList: load()
     }
   },
   computed: {
-    safeMarkdown () {
-      if (!this.slug) return null
-      const element = this.elements.find(e => e.slug === this.slug)
-      return element && element.markdown
+    element () {
+      return this.localList.find(e => e.id === this.id)
+    },
+    nextId () {
+      return `${this.localList.length + 1}`
     }
   },
   methods: {
-    onEdit (markdown) {
-      this.elements.find(e => e.slug === this.slug).markdown = markdown
-      save(this.elements)
+    saveLocal () {
+      save(this.localList)
     },
     create () {
-      const {game} = this
-      const slug = `${this.elements.length + 1}`
-      this.elements.push({title: slug, slug, markdown: ''})
-      save(this.elements)
-      this.$router.push({ name: 'element', params: {game, slug} })
+      const {gameId, nextId} = this
+      this.localList.push({id: nextId, title: nextId, markdown: `# ${nextId}\n\n`})
+      this.saveLocal()
+      this.$message({type: 'success', message: `Created Element ${nextId}`})
+      this.$router.push({name: 'game', params: {gameId, id: nextId}})
     },
-    del ({slug}) {
-      const {game} = this
-      this.elements = this.elements.filter(e => e.slug !== slug)
-      save(this.elements)
-      this.$router.push({ name: 'game', params: {game} })
-      this.$message({
-        type: 'success',
-        message: 'Delete completed'
-      })
+    del ({id}) {
+      const {gameId} = this
+      const i = this.localList.findIndex(e => e.id === id)
+      this.localList.splice(i, 1)
+      this.saveLocal()
+      this.$message({ type: 'success', message: 'Deleted' })
+      this.$router.push({ name: 'game', params: {gameId} })
+    },
+    onEdit (markdown) {
+      this.element.markdown = markdown
+      this.saveLocal()
     }
   }
 }
@@ -61,8 +63,8 @@ export default {
 
 <template>
   <div class="view">
-    <element-nav :game="game" :elements="elements" @create="create" @delete="del"/>
-    <router-view :markdown="safeMarkdown" @edit="onEdit"/>
+    <element-nav :gameId="gameId" :elements="localList" @create="create" @delete="del"/>
+    <edit-element v-if="element" :markdown="element.markdown" @edit="onEdit"/>
   </div>
 </template>
 

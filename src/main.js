@@ -7,8 +7,6 @@ import App from './App.vue'
 import Dashboard from './user/Dashboard.vue'
 import Game from './games/Game.vue'
 import NewGame from './games/NewGame.vue'
-import EditElement from './games/elements/EditElement.vue'
-import NewElement from './games/elements/NewElement.vue'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -28,20 +26,16 @@ Vue.use(ElementUI)
 const router = new VueRouter({
   mode: 'hash',
   routes: [
-    { path: '*', redirect: '/' },
     { path: '/', component: null },
-    { path: '/me', name: 'dashboard', component: Dashboard },
     { path: '/new', name: 'newgame', component: NewGame },
+    { path: '/:orgId', name: 'dashboard', component: Dashboard, props: true },
     {
-      path: '/g/:game',
+      path: '/:orgId/:gameId/:id(\\d+)?',
+      name: 'game',
       component: Game,
-      props: true,
-      children: [
-        { path: '', component: null, name: 'game' },
-        { path: 'new', component: NewElement, name: 'newelement' },
-        { path: ':slug', component: EditElement, props: true, name: 'element' }
-      ]
-    }
+      props: true
+    },
+    { path: '*', redirect: '/' }
   ]
 })
 

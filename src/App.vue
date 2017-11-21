@@ -3,8 +3,20 @@ export default {
   name: 'App',
   data () {
     return {
-      dialogFormVisible: false,
-      form: {}
+      games: [
+        {
+          orgId: 'company',
+          gameId: 'awesome-game',
+          title: 'My Awesome Game'
+        }
+      ]
+    }
+  },
+  computed: {
+    gameTitle () {
+      const {orgId, gameId} = this.$route.params
+      const game = this.games.find(g => g.orgId === orgId && g.gameId === gameId)
+      return game && game.title
     }
   }
 }
@@ -13,30 +25,23 @@ export default {
 <template>
   <div class="app">
 
-    <el-dialog title="create new game" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="display name">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="slug">
-          <el-input v-model="form.slug" auto-complete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog>
-
     <el-menu mode="horizontal" :router="true">
       <span class="brand">devise</span>
-      <el-menu-item index="dashboard" :route="{name:'dashboard'}" class="right">
-        dashboard
+      <el-menu-item index="dashboard" :route="{name:'dashboard',params:{orgId:'me'}}" class="right">
+        Dashboard
       </el-menu-item>
       <el-submenu index="games" class="right">
-        <template slot="title">{{$route.params.game||'select a game'}}</template>
-        <el-menu-item index="game:vacuum" :route="{name:'game',params:{game:'vacuum'}}">Vacuum</el-menu-item>
-        <el-menu-item index="newgame" :route="{name:'newgame'}"><i class="el-icon-circle-plus"></i>new game</el-menu-item>
+        <template slot="title">{{gameTitle || 'Select a Game'}}</template>
+        <el-menu-item
+          v-for="g in games"
+          :key="`${g.orgId}/${g.gameId}`"
+          :index="`${g.orgId}/${g.gameId}`"
+          :route="{name:'game',params:g}">
+          {{g.orgId}}/{{g.gameId}}
+        </el-menu-item>
+        <el-menu-item index="newgame" :route="{name:'newgame'}">
+          <i class="el-icon-circle-plus"></i>New Game
+        </el-menu-item>
       </el-submenu>
     </el-menu>
 
