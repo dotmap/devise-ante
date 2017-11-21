@@ -3,23 +3,7 @@ import ElementNav from './elements/ElementNav.vue'
 import EditElement from './elements/EditElement.vue'
 
 const save = s => localStorage.setItem('elements', JSON.stringify(s))
-const load = () => JSON.parse(localStorage.getItem('elements') || false) || [
-  {
-    slug: 'player-rovs',
-    title: 'ROVs',
-    markdown: `# ROVs\n\nThe core game mechanic is driving remotely operated vehicles around a two-dimensional map.\n`
-  },
-  {
-    slug: 'player-views',
-    title: 'Views',
-    markdown: 'Views are the actual visuals of the game, and have types like sonar or something.'
-  },
-  {
-    slug: 'defenses',
-    title: 'ROV Defense Upgrades',
-    markdown: 'You can get upgrades for your robots.\n\nSometime soon this will support markdown.\n'
-  }
-]
+const load = () => JSON.parse(localStorage.getItem('elements') || '[]')
 
 export default {
   name: 'Game',
@@ -34,7 +18,7 @@ export default {
     },
     slug: {
       type: String,
-      required: true
+      required: false
     }
   },
   data () {
@@ -54,10 +38,10 @@ export default {
       this.elements.find(e => e.slug === this.slug).markdown = markdown
       save(this.elements)
     },
-    onNew ({title, slug}) {
-      console.log('onNew')
+    create () {
       const {game} = this
-      this.elements.push({title, slug, markdown: ''})
+      const slug = `${this.elements.length + 1}`
+      this.elements.push({title: slug, slug, markdown: ''})
       save(this.elements)
       this.$router.push({ name: 'element', params: {game, slug} })
     },
@@ -66,6 +50,10 @@ export default {
       this.elements = this.elements.filter(e => e.slug !== slug)
       save(this.elements)
       this.$router.push({ name: 'game', params: {game} })
+      this.$message({
+        type: 'success',
+        message: 'Delete completed'
+      })
     }
   }
 }
@@ -73,8 +61,8 @@ export default {
 
 <template>
   <div class="view">
-    <element-nav :game="game" :elements="elements" @delete="del"/>
-    <router-view :markdown="safeMarkdown" @edit="onEdit" @new="onNew"/>
+    <element-nav :game="game" :elements="elements" @create="create" @delete="del"/>
+    <router-view :markdown="safeMarkdown" @edit="onEdit"/>
   </div>
 </template>
 
