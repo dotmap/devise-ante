@@ -23,9 +23,7 @@ export default {
 
 <style lang="scss" scoped>
   .edit-element {
-    flex-grow: 1;
     display: flex;
-    flex-flow: column;
     .el-textarea {
       flex-grow: 1;
       /deep/ .el-textarea__inner {

@@ -62,18 +62,26 @@ export default {
 </script>
 
 <template>
-  <div class="view">
-    <element-nav :gameId="gameId" :elements="localList" @create="create" @delete="del"/>
-    <edit-element v-if="element" :markdown="element.markdown" @edit="onEdit"/>
-  </div>
+  <el-container>
+    <el-aside width="240px">
+      <element-nav :gameId="gameId" :elements="localList" @create="create" @delete="del"/>
+    </el-aside>
+    <el-main>
+      <edit-element v-if="element" :markdown="element.markdown" @edit="onEdit"/>
+    </el-main>
+  </el-container>
 </template>
 
 <style lang="scss" scoped>
-  .view {
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
-    // necessary for router-view's vertical scrolling
-    height: calc(100% - 61px);
+  .el-container {
+    .el-aside {
+      overflow: inherit;
+    }
+    .el-main {
+      padding: 0;
+      .edit-element {
+        height: 100%;
+      }
+    }
   }
 </style>

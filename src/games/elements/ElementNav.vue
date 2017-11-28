@@ -26,36 +26,42 @@ export default {
 </script>
 
 <template>
-  <div class="column">
-    <el-menu :router="true">
-      <span
-        v-for="e in elements"
-        :key="e.id"
-        @contextmenu.prevent="open(e)">
-        <el-menu-item
-          :index="`e:${e.id}`"
-          :route="{name: 'game', params: {gameId, id: e.id}}">
-          {{e.title}}
-        </el-menu-item>
-      </span>
-    </el-menu>
-    <el-button icon="el-icon-circle-plus" type="success" plain @click="$emit('create')">New</el-button>
-  </div>
+  <el-container>
+    <el-main>
+      <el-menu :router="true">
+        <span
+          v-for="e in elements"
+          :key="e.id"
+          @contextmenu.prevent="open(e)">
+          <el-menu-item
+            :index="`e:${e.id}`"
+            :route="{name: 'game', params: {gameId, id: e.id}}">
+            {{e.title}}
+          </el-menu-item>
+        </span>
+      </el-menu>
+    </el-main>
+    <el-footer>
+      <el-button icon="el-icon-circle-plus" type="success" plain @click="$emit('create')">New</el-button>
+    </el-footer>
+  </el-container>
 </template>
 
 <style lang="scss" scoped>
-  .column {
-    width: 240px;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: column;
-    .el-menu {
+  .el-container {
+    flex: initial;
+    height: 100%;
+    .el-main {
+      padding: 0;
       overflow-y: scroll;
-      flex-grow: 1;
     }
-    .el-button {
-      box-sizing: border-box;
-      width: 100%;
+    .el-footer {
+      padding: 0;
+      .el-button {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 </style>
