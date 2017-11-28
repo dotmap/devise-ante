@@ -1,35 +1,41 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AtUI from 'at-ui'
-import 'at-ui-style'
+import ElementUI from 'element-ui'
+import slugify from 'slugify'
 
 import App from './App.vue'
-import Editor from './Editor.vue'
-import GameView from './GameView.vue'
-import GameSelect from './GameSelect.vue'
-import UserView from './UserView.vue'
+import Dashboard from './user/Dashboard.vue'
+import Game from './games/Game.vue'
+import NewGame from './games/NewGame.vue'
 
-Vue.use(AtUI)
+import 'element-ui/lib/theme-chalk/index.css'
+
+slugify.extend({ '!': 'bang' })
+slugify.extend({ '@': 'at' })
+slugify.extend({ '#': 'hashtag' })
+slugify.extend({ '%': 'percent' })
+slugify.extend({ '^': 'top' })
+slugify.extend({ '*': 'star' })
+slugify.extend({ '~': 'tilda' })
+slugify.extend({ '+': 'plus' })
+slugify.extend({ '=': 'is' })
+
 Vue.use(VueRouter)
+Vue.use(ElementUI)
 
 const router = new VueRouter({
   mode: 'hash',
   routes: [
-    { path: '*', redirect: '/' },
-    { path: '/', component: GameSelect },
-    { path: '/user', name: 'user', component: UserView },
+    { path: '/', component: null },
+    { path: '/new', name: 'newgame', component: NewGame },
+    { path: '/:orgId', name: 'dashboard', component: Dashboard, props: true },
     {
-      path: '/:game',
-      component: GameView,
-      children: [
-        { path: '', component: null, name: 'game' },
-        {
-          path: '*',
-          component: Editor,
-          props: route => ({ slug: route.params[0] })
-        }
-      ]
-    }
+      path: '/:orgId/:gameId/:id(\\d+)?',
+      name: 'game',
+      component: Game,
+      props: true
+    },
+    { path: '*', redirect: '/' }
   ]
 })
 

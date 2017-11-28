@@ -1,19 +1,20 @@
 <script>
 export default {
-  name: 'UserView'
+  name: 'Dashboard'
 }
 </script>
 
 <template>
   <div class="user view">
-    <h1>UserView</h1>
+    <h1>Dashboard</h1>
+    <p>Nothing to see, nothing to do.</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .user.view {
+  .user {
     height: 100%;
     flex-grow: 1;
-    background: rgba(255, 200, 255, 0.5);
+    padding: 1rem;
   }
 </style>

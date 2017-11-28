@@ -65,8 +65,7 @@ module.exports = {
     noInfo: true,
     historyApiFallback: {
       index: '/dist/'
-    },
-    quiet: true
+    }
   },
   devtool: '#eval-source-map',
   plugins: [
