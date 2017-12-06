@@ -25,6 +25,7 @@
   "dependencies": {
     "element-ui": "^2.0.4",
     "slugify": "^1.2.1",
+    "uuid": "^3.1.0",
     "vue": "^2.5.3",
     "vue-router": "^3.0.1"
   },
