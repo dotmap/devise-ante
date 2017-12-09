@@ -3,18 +3,13 @@ import uuid from 'uuid'
 import ElementNav from './elements/ElementNav.vue'
 import EditElement from './elements/EditElement.vue'
 
-const load = () => {
-  return JSON.parse(localStorage.getItem('daba') || 'false') || {
-    elements: [],
-    nextElement: 1,
-    tags: []
-  }
-}
-
-const save = s => {
-  const state = load()
-  Object.assign(state, s)
-  localStorage.setItem('daba', JSON.stringify(state))
+function randomHexColor () {
+  const low = 0xCC
+  const range = 0xFF - low
+  return '#' +
+    Math.floor(Math.random() * range + low).toString(16) +
+    Math.floor(Math.random() * range + low).toString(16) +
+    Math.floor(Math.random() * range + low).toString(16)
 }
 
 export default {
@@ -24,8 +19,8 @@ export default {
     EditElement
   },
   props: {
-    gameId: {
-      type: String,
+    game: {
+      type: Object,
       required: true
     },
     id: {
@@ -34,97 +29,97 @@ export default {
     }
   },
   data () {
-    return Object.assign(load(), {
-      loading: false,
+    return {
       nextTag: '',
-      query: ''
-    })
+      tagQuery: ''
+    }
   },
   computed: {
     element () {
-      return this.elements.find(e => e.id === this.id)
+      const {game} = this
+      return game.elements.find(e => e.id === this.id)
+    },
+    tags () {
+      const {game, element} = this
+      return element.tags.map(id => game.tags.find(t => t.id === id))
     },
     availableTags () {
-      const {tags, element, query} = this
-      return tags
+      const {element, tagQuery} = this
+      return this.game.tags
         .filter(t => element.tags.indexOf(t.id) === -1)
-        .filter(t => t.title.toLowerCase().indexOf(query.toLowerCase()) > -1)
+        .filter(t => t.title.toLowerCase().indexOf(tagQuery.toLowerCase()) > -1)
     }
   },
   methods: {
-    save () {
-      const {tags, elements, nextElement} = this
-      save({elements, tags, nextElement})
-    },
-    create () {
-      const {gameId, elements, nextElement} = this
+    createElement () {
+      const {gameId, elements, nextElement} = this.game
       const id = `${nextElement}`
-      elements.push({id, title: `Element ${id}`, markdown: ``, tags: []})
-      this.nextElement++
-      save({elements, nextElement: nextElement + 1})
-      this.$message({type: 'success', message: `Created Element ${id}`})
+      const elem = {id, title: `Element ${id}`, markdown: ``, tags: []}
+      elements.push(elem)
+      this.game.nextElement++
       this.$router.push({name: 'game', params: {gameId, id}})
+      this.$emit('change')
     },
-    del ({id}) {
-      const {gameId, elements, tags} = this
-      const i = elements.findIndex(e => e.id === id)
-      elements.splice(i, 1)
-
-      const origTags = this.tags.length
+    deleteElement ({id}) {
+      const {gameId, elements, tags} = this.game
+      this.elements = elements.filter(e => e.id === id)
       this.tags = tags.filter(t => elements.find(e => e.tags.find(id => id === t.id)))
-      save({elements, tags: this.tags})
-
-      this.$message({ type: 'success', message: `Deleted element and ${origTags - this.tags.length} tags.` })
       this.$router.push({ name: 'game', params: {gameId} })
-    },
-    setMarkdown (markdown) {
-      const {elements} = this
-      this.element.markdown = markdown
-      save({elements})
-    },
-    tag (id) {
-      return this.tags.find(e => e.id === id)
+      this.$emit('change')
     },
     setTagColor (id, color) {
-      this.tag(id).color = color
+      const tag = this.tags.find(t => t.id === id)
+      tag.color = color
+      this.$emit('change')
     },
+    filterTags (query) {
+      this.tagQuery = query
+    },
+
+    // current element actions
+
+    setMarkdown (markdown) {
+      this.element.markdown = markdown
+      this.$emit('change')
+    },
+
     createTag () {
-      const id = uuid.v1()
-      const {nextTag, tags, elements, element} = this
-      if (typeof nextTag === 'string') {
-        element.tags.push(id)
-        const low = 0xCC
-        const range = 0xFF - low
-        const color = '#' +
-        Math.floor(Math.random() * range + low).toString(16) +
-        Math.floor(Math.random() * range + low).toString(16) +
-        Math.floor(Math.random() * range + low).toString(16)
-        tags.push({id, title: nextTag, color})
-        save({tags, elements})
-        this.nextTag = ''
+      const {tags} = this.game
+      const {element, nextTag} = this
+      if (typeof nextTag === 'object') {
+        element.tags.push(nextTag.id)
+        this.$emit('change')
+      } else if (tags.find(t => t.title.toLowerCase() === nextTag.toLowerCase())) {
+        this.$message({message: 'Tag already exists.', type: 'warning'})
       } else {
-        const tag = tags.find(t => t.id === nextTag.id)
-        element.tags.push(tag.id)
-        save({elements})
-        this.nextTag = ''
+        const id = uuid.v1()
+        const color = randomHexColor()
+        const title = nextTag
+        tags.push({id, color, title})
+        element.tags.push(id)
+        this.$emit('change')
+        this.$message({message: `"${title}" tag created.`, type: 'success'})
       }
-      setImmediate(() => this.$refs.TagEntry.focus())
+      setImmediate(() => {
+        this.nextTag = ''
+        this.$refs.TagEntry.focus()
+      })
     },
-    removeTag (tag) {
-      const {tags, elements, element} = this
-      const i = element.tags.findIndex(t => t === tag)
+
+    removeTag (tagId) {
+      const {element} = this
+      const i = element.tags.findIndex(t => t === tagId)
       element.tags.splice(i, 1)
 
-      const used = elements.find((e) => e.tags.find(t => t === tag))
+      const {elements, tags} = this.game
+      const used = elements.find((e) => e.tags.find(t => t === tagId))
       if (!used) {
-        const i = tags.findIndex(t => t.id === tag)
-        tags.splice(i, 1)
+        const {title} = tags.find(t => t.id === tagId)
+        this.game.tags = tags.filter(t => t.id !== tagId)
+        this.$message({message: `"${title}" tag removed.`, type: 'warning'})
       }
 
-      save({tags, elements})
-    },
-    remoteMethod (query) {
-      this.query = query
+      this.$emit('change')
     }
   }
 }
@@ -132,70 +127,83 @@ export default {
 
 <template>
   <el-container>
+
     <el-aside width="240px">
-      <element-nav :gameId="gameId" :elements="elements" @create="create" @delete="del"/>
+      <element-nav
+        :gameId="game.gameId"
+        :elements="game.elements"
+        @create="createElement"
+        @delete="deleteElement" />
     </el-aside>
+
     <el-main v-if="element">
-      <div class="meta">
 
-        <el-input
-          size="mini"
-          v-model="element.title"
-          placeholder="Element Title"
-          @change="save"
-        />
+      <el-form :inline="true" :model="element" size="mini">
 
-        <el-select
-          ref="TagEntry"
-          size="mini"
-          v-model="nextTag"
-          filterable
-          remote
-          reserve-keyword
-          allow-create
-          default-first-option
-          placeholder="New Tag..."
-          loading-text="Loading"
-          no-data-text="No data"
-          no-match-text="No match"
-          :remote-method="remoteMethod"
-          :loading="loading"
-          @change="createTag">
-          <el-option
-            v-for="tag in availableTags"
-            :key="tag.id"
-            :label="tag.title"
-            :value="tag">
-          </el-option>
-        </el-select>
+        <el-form-item label="Title">
+          <el-input
+            v-model="element.title"
+            placeholder="Element Title"
+            @change="$emit('change')"/>
+        </el-form-item>
+
+        <el-form-item label="Tags">
+          <el-select
+            size="mini"
+            filterable
+            remote
+            reserve-keyword
+            allow-create
+            default-first-option
+            placeholder="New Tag..."
+            loading-text="Loading"
+            no-data-text="No data"
+            no-match-text="No match"
+            ref="TagEntry"
+            v-model="nextTag"
+            :loading="false"
+            :remote-method="filterTags"
+            @change="createTag">
+            <el-option
+              v-for="tag in availableTags"
+              :key="tag.id"
+              :label="tag.title"
+              :value="tag">
+            </el-option>
+          </el-select>
+
+        </el-form-item>
 
         <el-popover
-          class="tag-edit"
-          v-for="id in element.tags"
+          v-for="{id, title, color} in tags"
           :key="id"
           placement="top"
           trigger="click">
-          <el-tag slot="reference"
-            type="info"
-            :color="tag(id).color"
-            size="small"
-            closable
-            @close="removeTag(id)">
-            {{tag(id).title}}
-          </el-tag>
           <el-color-picker
             style="float:right"
-            :value="tag(id).color"
+            :value="color"
             @active-change="c => setTagColor(id, c)"
           />
-          <h2>{{tag(id).title}}</h2>
+          <h2>{{title}}</h2>
           <br>
           <code>{{id}}</code>
+
+          <el-tag
+            slot="reference"
+            type="info"
+            size="small"
+            closable
+            :color="color"
+            @close="removeTag(id)">
+            {{title}}
+          </el-tag>
+
         </el-popover>
 
         <el-tag v-if="element.tags.length === 0" size="small" type="info">Untagged</el-tag>
 
-      </div>
+      </el-form>
+
       <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
     </el-main>
   </el-container>
@@ -212,18 +220,9 @@ export default {
       display: flex;
       flex-flow: column;
 
-      .meta {
-        .el-input {
-          display: inline-block;
-          width: 180px;
-        }
-        .el-select {
-          width: 120px;
-        }
-        .el-tag {
-          margin: 2px;
-          cursor: pointer;
-        }
+      .el-tag {
+        margin: 2px;
+        cursor: pointer;
       }
 
       .edit-element {
