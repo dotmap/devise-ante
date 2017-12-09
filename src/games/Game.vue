@@ -179,16 +179,14 @@ export default {
           :key="id"
           placement="top"
           trigger="click">
+
           <el-color-picker
-            style="float:right"
             :value="color"
             @active-change="c => setTagColor(id, c)"
           />
-          <h2>{{title}}</h2>
-          <br>
-          <code>{{id}}</code>
 
           <el-tag
+            disable-transitions
             slot="reference"
             type="info"
             size="small"
@@ -201,7 +199,6 @@ export default {
         </el-popover>
 
         <el-tag v-if="element.tags.length === 0" size="small" type="info">Untagged</el-tag>
-
       </el-form>
 
       <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
