@@ -10,7 +10,9 @@
     "cm": "git-cz",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "open": "cypress open",
     "test:lint": "eslint --fix **/*.{js,vue}",
+    "test:integration": "cypress run",
     "test": "run-s test:**",
     "precommit": "lint-staged"
   },
