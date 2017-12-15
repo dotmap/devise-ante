@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:9-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -19,11 +19,13 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
+      - run: yarn dev &
+      - run: npx wait-on http://localhost:3000
+      - run: yarn test:integration --record --key $DEVISE_CYPRESS_TOKEN
       - run: yarn build
   deploy_staging:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:9
     working_directory: ~/repo
     steps:
       - checkout
@@ -38,7 +40,7 @@ jobs:
 
   deploy_prod:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:9
     working_directory: ~/repo
     steps:
       - checkout
