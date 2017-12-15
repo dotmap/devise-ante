@@ -19,7 +19,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn dev &
+      - run: yarn dev
       - run: npx wait-on http://localhost:3000
       - run: yarn test:integration --record --key $DEVISE_CYPRESS_TOKEN
   build:
