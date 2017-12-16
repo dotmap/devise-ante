@@ -11,6 +11,7 @@ cypress.run({
 }).then(res => {
   server.stop()
   if (res.failures > 0) {
-    throw new Error(`${res.failures} out of ${res.tests} tests failed in ${res.duration}. Take a look at the log above for details.`)
+    console.error(new Error(`${res.failures} out of ${res.tests} tests failed in ${res.duration}. Take a look at the log above for details.`))
+    process.exit(1)
   }
 }).catch(err => { throw new Error(err) })
