@@ -12,7 +12,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "open": "cypress open",
     "test:lint": "eslint --fix **/*.{js,vue}",
-    "test:integration": "cypress run",
+    "test:integration": "node cypress/test.js",
     "test": "run-s test:**",
     "precommit": "lint-staged"
   },
@@ -62,12 +62,12 @@
     "prettier-standard": "^7.0.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
+    "serve": "^6.4.1",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.0.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.3",
-    "wait-on": "^2.0.2",
     "webpack": "^3.0.0",
     "webpack-dashboard": "^1.0.0-5",
     "webpack-dev-server": "^2.5.0"
