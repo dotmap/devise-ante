@@ -94,7 +94,17 @@ More info to come.
 
 ## Tests
 
-Still working on this.
+We rely mainly on integration testing to make sure things work properly, using [Cypress](https://cypress.io). Check those docs when you need to write tests. Any written specs are run automatically during CI, and are fully recorded in order to review any issues that arise.
+
+If you want to run tests, it's pretty simple.
+```sh
+# Build production version
+npm run build
+# Launch test server
+npm run test:integration
+```
+
+This launches a script that instantiates a [serve](https://github.com/zeit/serve) instance in the `dist` folder, runs the tests, then kills the server. This process will change with the introduction of a GraphQL server in the near future.
 
 ## Style guide
 
