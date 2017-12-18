@@ -1,22 +1,39 @@
 <script>
+
+const save = s => localStorage.setItem('daba', JSON.stringify(s))
+
+const load = () => {
+  return JSON.parse(localStorage.getItem('daba') || 'false') || {
+    games: [
+      {
+        orgId: 'company',
+        gameId: 'awesome-game',
+        title: 'My Awesome Game',
+        elements: [],
+        nextElement: 1,
+        tags: []
+      }
+    ]
+  }
+}
+
 export default {
   name: 'App',
-  data () {
-    return {
-      games: [
-        {
-          orgId: 'company',
-          gameId: 'awesome-game',
-          title: 'My Awesome Game'
-        }
-      ]
+  data: () => load(),
+  computed: {
+    game () {
+      const {orgId, gameId} = this.$route.params
+      return this.games.find(g => g.orgId === orgId && g.gameId === gameId)
+    },
+    gameTitle () {
+      const {game} = this
+      return game && game.title
     }
   },
-  computed: {
-    gameTitle () {
-      const {orgId, gameId} = this.$route.params
-      const game = this.games.find(g => g.orgId === orgId && g.gameId === gameId)
-      return game && game.title
+  methods: {
+    saveAll () {
+      const {games} = this
+      return save({games})
     }
   }
 }
@@ -47,7 +64,7 @@ export default {
       </el-menu>
     </el-header>
 
-    <router-view>
+    <router-view :game="game" @change="saveAll">
       <!-- Everything below the top site nav -->
     </router-view>
 
