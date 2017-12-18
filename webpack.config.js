@@ -109,7 +109,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = ''
   module.exports.plugins = (module.exports.plugins || []).concat([
     new CleanPlugin(['dist']),
     new webpack.DefinePlugin({

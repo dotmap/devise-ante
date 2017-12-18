@@ -52,18 +52,18 @@ export default {
   },
   methods: {
     createElement () {
-      const {gameId, elements, nextElement} = this.game
+      const {gameId, nextElement} = this.game
       const id = `${nextElement}`
       const elem = {id, title: `Element ${id}`, markdown: ``, tags: []}
-      elements.push(elem)
+      this.game.elements.push(elem)
       this.game.nextElement++
       this.$router.push({name: 'game', params: {gameId, id}})
       this.$emit('change')
     },
     deleteElement ({id}) {
       const {gameId, elements, tags} = this.game
-      this.elements = elements.filter(e => e.id === id)
-      this.tags = tags.filter(t => elements.find(e => e.tags.find(id => id === t.id)))
+      this.game.elements = elements.filter(e => e.id !== id)
+      this.game.tags = tags.filter(t => this.game.elements.find(e => e.tags.find(id => id === t.id)))
       this.$router.push({ name: 'game', params: {gameId} })
       this.$emit('change')
     },
