@@ -13,12 +13,23 @@ module.exports = {
     {value: 'WIP',      name: 'WIP:      Work in progress'}
   ],
   scopeOverrides: {
-    fix: [
-      {name: 'bug'},
-      {name: 'test'}
+    feat: [
+      {name: 'elements'},
+      {name: 'games'},
+      {name: 'users'},
+      {name: 'settings'},
+      {name: 'organizations'},
+      {name: 'onboarding'}
     ],
-    chore: [
-      {name: 'dependencies'}
+    fix: [
+      {name: 'elements'},
+      {name: 'games'},
+      {name: 'users'},
+      {name: 'settings'},
+      {name: 'organizations'},
+      {name: 'onboarding'},
+      {name: 'test'},
+      {name: 'bug'}
     ],
     docs: [
       {name: 'code'},
@@ -26,12 +37,16 @@ module.exports = {
       {name: 'contributing'},
       {name: 'readme'}
     ],
+    chore: [
+      {name: 'dependencies'},
+      {name: 'merge'}
+    ],
     pipeline: [
       {name: 'webpack'},
       {name: 'circle'},
       {name: 'cypress'},
       {name: 'eslint'},
-      {name: 'scripts'},
+      {name: 'npm'},
       {name: 'commitizen'}
     ]
   },
