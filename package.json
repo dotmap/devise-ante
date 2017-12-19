@@ -10,7 +10,9 @@
     "cm": "git-cz",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "open": "cypress open",
     "test:lint": "eslint --fix **/*.{js,vue}",
+    "test:integration": "node cypress/test.js",
     "test": "run-s test:**",
     "precommit": "lint-staged"
   },
@@ -37,9 +39,11 @@
     "commitizen": "^2.9.6",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
-    "cz-conventional-changelog": "^2.0.0",
+    "cypress": "^1.1.4",
+    "cz-customizable": "^5.2.0",
     "eslint": "^4.13.1",
     "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-cypress": "^2.0.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.5.0",
@@ -58,6 +62,7 @@
     "prettier-standard": "^7.0.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
+    "serve": "^6.4.1",
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.0.0",
@@ -69,7 +74,10 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./cz-config.js"
     }
   }
 }

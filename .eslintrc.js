@@ -1,7 +1,8 @@
 module.exports = {
   'plugins': [
     'vue',
-    'standard'
+    'standard',
+    'cypress'
   ],
   'extends': [
     'standard',
