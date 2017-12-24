@@ -59,12 +59,15 @@ export default {
   .el-container {
     flex: initial;
     height: 100%;
+
     .el-main {
       padding: 0;
       overflow-y: scroll;
     }
+
     .el-footer {
       padding: 0;
+
       .el-button {
         box-sizing: border-box;
         width: 100%;

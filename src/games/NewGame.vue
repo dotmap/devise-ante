@@ -32,9 +32,13 @@ export default {
     width: 480px;
     margin: 4rem auto;
     text-align: center;
-    .at-input, p, .slug-preview {
+
+    .at-input,
+    p,
+    .slug-preview {
       margin: 1rem 0;
     }
+
     .slug-preview {
       display: block;
     }

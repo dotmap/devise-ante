@@ -211,6 +211,7 @@ export default {
     .el-aside {
       overflow: inherit;
     }
+
     .el-main {
       padding: 4px;
       background-color: rgba(0, 0, 0, 0.1);
