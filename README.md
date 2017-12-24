@@ -4,7 +4,7 @@
 
 > Make great game documentation
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de76c263ff0941f1894d4e76565b99bf)](https://www.codacy.com/app/multi-cell/devise-ante?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=multi-cell/devise-ante&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2ad78f095809a0fc6bf5/maintainability)](https://codeclimate.com/github/multi-cell/devise-ante/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/multi-cell/devise-ante/badge.svg)](https://snyk.io/test/github/multi-cell/devise-ante)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmulti-cell%2Fdevise-ante.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmulti-cell%2Fdevise-ante?ref=badge_shield)
 [![Greenkeeper badge](https://badges.greenkeeper.io/multi-cell/devise-ante.svg)](https://greenkeeper.io/)
