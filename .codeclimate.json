@@ -1,35 +1,36 @@
 {
-    "version": 2,
-    "plugins": {
-      "eslint": {
-        "enabled": true,
-        "channel": "eslint-4",
-        "config": {
-          "extensions": [
-            ".js",
-            ".mjs"
-          ]
-        }
-      },
-      "fixme": {
-        "enabled": true,
-        "config": {
-          "strings": [
-            "TODO",
-            "BUG",
-            "FIXME",
-            "NOTE"
-          ]
-        }
-      },
-      "stylelint": {
-        "enabled": true,
-        "config": {
-          "extends": "stylelint-config-standard",
-          "processors": ["stylelint-processor-html"],
-          "rules": { "no-empty-source": null },
-          "ignoreFiles": ["**/*.js"]
-        }
+  "version": 2,
+  "plugins": {
+    "eslint": {
+      "enabled": true,
+      "channel": "eslint-4",
+      "config": {
+        "extensions": [
+          ".js",
+          ".mjs",
+          ".vue"
+        ]
+      }
+    },
+    "fixme": {
+      "enabled": true,
+      "config": {
+        "strings": [
+          "TODO",
+          "BUG",
+          "FIXME",
+          "NOTE"
+        ]
+      }
+    },
+    "stylelint": {
+      "enabled": true,
+      "config": {
+        "extends": "stylelint-config-standard",
+        "processors": ["stylelint-processor-html"],
+        "rules": { "no-empty-source": null },
+        "ignoreFiles": ["**/*.js"]
       }
     }
   }
+}
