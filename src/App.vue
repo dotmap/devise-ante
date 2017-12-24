@@ -100,7 +100,7 @@ export default {
       z-index: 1;
 
       .brand {
-        padding: 1rem 24px 0 24px;
+        padding: 1rem 24px 0;
         font-family: 'Nunito', sans-serif;
         font-size: 14pt;
         position: relative;
