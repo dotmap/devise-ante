@@ -11,9 +11,10 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "open": "cypress open",
-    "test:lint": "eslint --fix **/*.{js,vue}",
-    "test:integration": "node cypress/test.js",
-    "test": "run-s test:**",
+    "lint:js": "eslint --fix **/*.{js,vue}",
+    "lint:style": "stylelint src/*",
+    "lint": "run-s lint:**",
+    "test": "node cypress/test.js",
     "precommit": "lint-staged"
   },
   "lint-staged": {
