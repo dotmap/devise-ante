@@ -147,7 +147,7 @@ export default {
             @change="$emit('change')"/>
         </el-form-item>
 
-        <el-form-item label="Tags">
+        <el-form-item label="Tags" id="tags">
           <el-select
             size="mini"
             filterable
