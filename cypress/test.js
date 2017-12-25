@@ -2,7 +2,9 @@ const path = require('path')
 const serve = require('serve')
 const cypress = require('cypress')
 
-const server = serve(path.join(__dirname, '..', 'dist'))
+const server = serve(path.join(__dirname, '..', 'dist'), {
+  port: 3000
+})
 
 cypress.run({
   browser: 'electron',

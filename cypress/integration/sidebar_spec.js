@@ -2,7 +2,7 @@
 
 describe('Element Navigation', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5000/#/company/awesome-game')
+    cy.visit('http://localhost:3000/#/company/awesome-game')
   })
 
   context('Initial Display', () => {
@@ -39,14 +39,14 @@ describe('Element Navigation', () => {
 
     it('Navigates to the selected element', () => {
       cy.get('#element-nav').find('li').first().click()
-      cy.url().should('eq', 'http://localhost:5000/#/company/awesome-game/1')
+      cy.url().should('eq', 'http://localhost:3000/#/company/awesome-game/1')
       cy.get('#element-pane').should('be.visible')
     })
 
     it('Navigates from one element to another', () => {
       cy.get('#element-nav').find('li').first().click()
       cy.get('#element-nav').find('li').last().click()
-      cy.url().should('eq', 'http://localhost:5000/#/company/awesome-game/2')
+      cy.url().should('eq', 'http://localhost:3000/#/company/awesome-game/2')
     })
   })
 
