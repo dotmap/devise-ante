@@ -2,6 +2,7 @@
 import uuid from 'uuid'
 import ElementNav from './elements/ElementNav.vue'
 import EditElement from './elements/EditElement.vue'
+import GameSettings from './GameSettings.vue'
 
 function randomHexColor () {
   const low = 0xCC
@@ -16,7 +17,8 @@ export default {
   name: 'Game',
   components: {
     ElementNav,
-    EditElement
+    EditElement,
+    GameSettings
   },
   props: {
     game: {
@@ -143,6 +145,10 @@ export default {
 
       <el-form :inline="true" :model="element" size="mini">
 
+        <router-link :to="{ name: 'game', params: {gameId: game.gameId} }">
+          <i class="el-icon-d-arrow-left"></i><i class="el-icon-setting"></i>
+        </router-link>
+
         <el-form-item label="Title">
           <el-input
             v-model="element.title"
@@ -222,6 +228,11 @@ export default {
 
       <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
     </el-main>
+
+    <el-main v-else>
+      <game-settings :game="game" @change="$emit('change')"/>
+    </el-main>
+
   </el-container>
 </template>
 
@@ -244,6 +255,10 @@ export default {
       .edit-element {
         flex-grow: 1;
         margin-top: 4px;
+      }
+
+      form a {
+        margin: 0 .5rem;
       }
 
       .el-form-item {
