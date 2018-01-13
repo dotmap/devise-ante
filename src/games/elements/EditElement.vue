@@ -1,4 +1,10 @@
 <script>
+import Editor from 'tui-editor'
+import 'tui-editor/dist/tui-editor-extScrollSync.min'
+import 'tui-editor/dist/tui-editor-extColorSyntax.min'
+import 'tui-editor/dist/tui-editor.min.css'
+import 'tui-editor/dist/tui-editor-contents.min.css'
+
 export default {
   name: 'EditElement',
   props: {
@@ -7,31 +13,33 @@ export default {
       required: true
     }
   },
-  methods: {
-    input (value) {
-      this.$emit('edit', value)
-    }
+  mounted () {
+    this.editor = new Editor({
+      el: this.$refs.editor,
+      initialEditType: 'wysiwyg',
+      initialValue: this.markdown || '',
+      previewStyle: 'tab',
+      height: '100%',
+      exts: ['colorSyntax', 'scrollSync'],
+      events: {
+        change: () => {
+          this.$emit('edit', this.editor.getValue())
+        }
+      }
+    })
   }
 }
 </script>
 
 <template>
   <div class="edit-element">
-    <el-input :value="markdown" @input="input" placeholder="add a description..." type="textarea"/>
+    <div class="editor" ref="editor"/>
   </div>
 </template>
 
 <style lang="scss" scoped>
   .edit-element {
     display: flex;
-    .el-textarea {
-      flex-grow: 1;
-      /deep/ .el-textarea__inner {
-        height: 100%;
-        border: 0;
-        margin: 0;
-        resize: none;
-      }
-    }
+    .editor { flex-grow: 1; }
   }
 </style>
