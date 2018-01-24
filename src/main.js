@@ -4,6 +4,9 @@ import ElementUI from 'element-ui'
 import slugify from 'slugify'
 
 import App from './App.vue'
+import Callback from './user/Callback.vue'
+import Login from './user/Login.vue'
+import Logout from './user/Logout.vue'
 import Dashboard from './user/Dashboard.vue'
 import Game from './games/Game.vue'
 import NewGame from './games/NewGame.vue'
@@ -27,6 +30,9 @@ const router = new VueRouter({
   mode: 'hash',
   routes: [
     { path: '/', component: null },
+    { path: '/login', component: Login },
+    { path: '/logout', component: Logout },
+    { path: '/callback', component: Callback },
     { path: '/new', name: 'newgame', component: NewGame },
     { path: '/:orgId', name: 'dashboard', component: Dashboard, props: true },
     {

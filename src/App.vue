@@ -1,4 +1,5 @@
 <script>
+import {isLoggedIn} from './auth'
 
 const save = s => localStorage.setItem('daba', JSON.stringify(s))
 
@@ -33,6 +34,9 @@ export default {
     gameTitle () {
       const {game} = this
       return game && game.title
+    },
+    isLoggedIn () {
+      return isLoggedIn()
     }
   },
   methods: {
@@ -50,6 +54,12 @@ export default {
     <el-header>
       <el-menu mode="horizontal" :router="true">
         <span class="brand">devise</span>
+        <el-menu-item v-if="!isLoggedIn" class="right" index="login">
+          Login
+        </el-menu-item>
+        <el-menu-item v-else class="right" index="logout">
+          Logout
+        </el-menu-item>
         <el-menu-item index="dashboard" :route="{name:'dashboard',params:{orgId:'me'}}" class="right">
           Dashboard
         </el-menu-item>
