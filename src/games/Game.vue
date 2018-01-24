@@ -59,7 +59,7 @@ export default {
     createElement () {
       const {gameId, nextElement} = this.game
       const id = `${nextElement}`
-      const elem = {id, title: `Element ${id}`, markdown: ``, tags: []}
+      const elem = {id, title: ``, markdown: ``, tags: []}
       this.game.elements.push(elem)
       this.game.nextElement++
       this.$router.push({name: 'game', params: {gameId, id}})
@@ -152,7 +152,7 @@ export default {
         <el-form-item label="Title">
           <el-input
             v-model="element.title"
-            placeholder="Element Title"
+            placeholder="Untitled"
             @change="$emit('change')"/>
         </el-form-item>
 
@@ -160,7 +160,7 @@ export default {
           <el-select
             size="mini"
             default-first-option
-            placeholder="New Tag..."
+            placeholder="Choose type"
             v-model="element.typeId"
             @change="$emit('change')">
             <el-option
@@ -180,7 +180,7 @@ export default {
             reserve-keyword
             allow-create
             default-first-option
-            placeholder="New Tag..."
+            placeholder="Add tag"
             loading-text="Loading"
             no-data-text="No data"
             no-match-text="No match"
@@ -226,7 +226,7 @@ export default {
         <el-tag v-if="element.tags.length === 0" size="small" type="info">Untagged</el-tag>
       </el-form>
 
-      <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
+      <edit-element :markdown="element.markdown" @edit="setMarkdown" :key="element.id"/>
     </el-main>
 
     <el-main v-else>

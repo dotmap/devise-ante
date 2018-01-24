@@ -36,13 +36,13 @@ export default {
           <el-menu-item
             :index="`e:${e.id}`"
             :route="{name: 'game', params: {gameId, id: e.id}}">
-            {{e.title}}
+            {{e.title || `Element ${e.id}`}}
           </el-menu-item>
         </span>
       </el-menu>
     </el-main>
     <el-footer>
-      <el-button icon="el-icon-circle-plus" type="success" plain @click="$emit('create')">New</el-button>
+      <el-button icon="el-icon-circle-plus" type="success" plain @click="$emit('create')">New Element</el-button>
     </el-footer>
   </el-container>
 </template>
