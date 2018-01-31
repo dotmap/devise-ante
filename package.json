@@ -65,7 +65,7 @@
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "vue-loader": "^13.0.0",
-    "vue-style-loader": "^3.0.1",
+    "vue-style-loader": "^4.0.1",
     "vue-template-compiler": "^2.5.11",
     "webpack": "^3.10.0",
     "webpack-dashboard": "^1.0.0-5",
