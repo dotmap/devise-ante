@@ -2,6 +2,7 @@
 import uuid from 'uuid'
 import ElementNav from './elements/ElementNav.vue'
 import EditElement from './elements/EditElement.vue'
+import GameSettings from './GameSettings.vue'
 
 function randomHexColor () {
   const low = 0xCC
@@ -16,7 +17,8 @@ export default {
   name: 'Game',
   components: {
     ElementNav,
-    EditElement
+    EditElement,
+    GameSettings
   },
   props: {
     game: {
@@ -42,6 +44,9 @@ export default {
     tags () {
       const {game, element} = this
       return element.tags.map(id => game.tags.find(t => t.id === id))
+    },
+    types () {
+      return this.game.types
     },
     availableTags () {
       const {element, tagQuery} = this
@@ -140,11 +145,31 @@ export default {
 
       <el-form :inline="true" :model="element" size="mini">
 
+        <router-link :to="{ name: 'game', params: {gameId: game.gameId} }">
+          <i class="el-icon-d-arrow-left"></i><i class="el-icon-setting"></i>
+        </router-link>
+
         <el-form-item label="Title">
           <el-input
             v-model="element.title"
             placeholder="Element Title"
             @change="$emit('change')"/>
+        </el-form-item>
+
+        <el-form-item label="Type" class="type-input">
+          <el-select
+            size="mini"
+            default-first-option
+            placeholder="New Tag..."
+            v-model="element.typeId"
+            @change="$emit('change')">
+            <el-option
+              v-for="type in types"
+              :key="type.id"
+              :label="type.title"
+              :value="type.id">
+            </el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="Tags">
@@ -203,6 +228,11 @@ export default {
 
       <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
     </el-main>
+
+    <el-main v-else>
+      <game-settings :game="game" @change="$emit('change')"/>
+    </el-main>
+
   </el-container>
 </template>
 
@@ -226,6 +256,20 @@ export default {
       .edit-element {
         flex-grow: 1;
         margin-top: 4px;
+      }
+
+      form a {
+        margin: 0 .5rem;
+      }
+
+      .el-form-item {
+        margin: 0 1rem 0 0;
+      }
+
+      .el-input, .el-select {
+        /deep/ input {
+          width: 120px;
+        }
       }
     }
   }

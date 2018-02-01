@@ -11,7 +11,12 @@ const load = () => {
         title: 'My Awesome Game',
         elements: [],
         nextElement: 1,
-        tags: []
+        tags: [],
+        types: [
+          {id: '84bfdd02-7ceb-4f16-9653-0b60f9bf25ea', title: 'Level'},
+          {id: '87216350-313c-43b4-8eb7-42fabfea00d4', title: 'Character'},
+          {id: 'e00463d3-90fa-428d-9d98-681360de031c', title: 'Item'}
+        ]
       }
     ]
   }
