@@ -1,4 +1,6 @@
 <script>
+import md2title from '../../util/markdown-to-title'
+
 export default {
   name: 'ElementNav',
   props: {
@@ -11,8 +13,18 @@ export default {
       required: true
     }
   },
+  computed: {
+    convertedList () {
+      return this.elements.map(e => {
+        return {
+          id: e.id,
+          title: md2title(e.markdown) || `Element ${e.id}`
+        }
+      })
+    }
+  },
   methods: {
-    open (e) {
+    deleteElement (e) {
       this.$confirm('This will permanently delete the element. Continue?', 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
@@ -30,13 +42,13 @@ export default {
     <el-main>
       <el-menu :router="true">
         <span
-          v-for="e in elements"
-          :key="e.id"
-          @contextmenu.prevent="open(e)">
+          v-for="{id, title} in convertedList"
+          :key="id"
+          @contextmenu.prevent="deleteElement({id})">
           <el-menu-item
-            :index="`e:${e.id}`"
-            :route="{name: 'game', params: {gameId, id: e.id}}">
-            {{e.title || `Element ${e.id}`}}
+            :index="`e:${id}`"
+            :route="{name: 'game', params: {gameId, id}}">
+            {{title}}
           </el-menu-item>
         </span>
       </el-menu>

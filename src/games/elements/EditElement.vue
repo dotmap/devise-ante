@@ -1,9 +1,6 @@
 <script>
-import Editor from 'tui-editor'
-import 'tui-editor/dist/tui-editor-extScrollSync.min'
-import 'tui-editor/dist/tui-editor-extColorSyntax.min'
-import 'tui-editor/dist/tui-editor.min.css'
-import 'tui-editor/dist/tui-editor-contents.min.css'
+import SimpleMDE from 'simplemde'
+import 'simplemde/dist/simplemde.min.css'
 
 export default {
   name: 'EditElement',
@@ -14,18 +11,27 @@ export default {
     }
   },
   mounted () {
-    this.editor = new Editor({
-      el: this.$refs.editor,
-      initialEditType: 'wysiwyg',
-      initialValue: this.markdown || '',
-      previewStyle: 'tab',
-      height: '100%',
-      exts: ['colorSyntax', 'scrollSync'],
-      events: {
-        change: () => {
-          this.$emit('edit', this.editor.getValue())
-        }
-      }
+    this.simplemde = new SimpleMDE({
+      element: this.$refs.editor,
+      initialValue: this.markdown,
+      status: [
+        {
+          className: 'saved',
+          defaultValue: function (el) {
+            // this.keystrokes = 0;
+            // el.innerHTML = "0 Keystrokes";
+            el.innerHTML = 'Saved Locally'
+          },
+          onUpdate: function (el) {
+            // el.innerHTML = ++this.keystrokes + " Keystrokes";
+          }
+        },
+        'lines',
+        'words'
+      ]
+    })
+    this.simplemde.codemirror.on('change', () => {
+      this.$emit('edit', this.simplemde.value())
     })
   }
 }
@@ -33,13 +39,6 @@ export default {
 
 <template>
   <div class="edit-element">
-    <div class="editor" ref="editor"/>
+    <textarea class="editor" ref="editor" @input="$emit('input')"/>
   </div>
 </template>
-
-<style lang="scss" scoped>
-  .edit-element {
-    display: flex;
-    .editor { flex-grow: 1; }
-  }
-</style>
