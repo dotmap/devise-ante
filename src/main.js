@@ -1,7 +1,10 @@
+import slugify from 'slugify'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
-import slugify from 'slugify'
+import VueI18n from 'vue-i18n'
+import enLocale from 'element-ui/lib/locale/lang/en'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 
 import App from './App.vue'
 import Callback from './user/Callback.vue'
@@ -23,8 +26,21 @@ slugify.extend({ '~': 'tilda' })
 slugify.extend({ '+': 'plus' })
 slugify.extend({ '=': 'is' })
 
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+  locale: 'en',
+  messages: {
+    en: enLocale,
+    zh: zhLocale
+  }
+})
+
+Vue.use(ElementUI, {
+  i18n: (key, value) => i18n.t(key, value)
+})
+
 Vue.use(VueRouter)
-Vue.use(ElementUI)
 
 const router = new VueRouter({
   mode: 'hash',
@@ -47,6 +63,7 @@ const router = new VueRouter({
 
 const app = new Vue({
   el: '#app',
+  i18n,
   router,
   render: h => h(App)
 })
