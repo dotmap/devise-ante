@@ -54,10 +54,10 @@ export default {
     <el-header>
       <el-menu mode="horizontal" :router="true">
         <span class="brand">devise</span>
-        <el-menu-item v-if="!isLoggedIn" class="right" index="login">
+        <el-menu-item v-if="!isLoggedIn" class="right" index="/login">
           Login
         </el-menu-item>
-        <el-menu-item v-else class="right" index="logout">
+        <el-menu-item v-else class="right" index="/logout">
           Logout
         </el-menu-item>
         <el-menu-item index="dashboard" :route="{name:'dashboard',params:{orgId:'me'}}" class="right">
