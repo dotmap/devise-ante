@@ -141,7 +141,7 @@ export default {
         @delete="deleteElement" />
     </el-aside>
 
-    <el-main v-if="element">
+    <el-main v-if="element" id="element-pane">
 
       <el-form :inline="true" :model="element" size="mini">
 

@@ -38,7 +38,7 @@ export default {
 </script>
 
 <template>
-  <el-container>
+  <el-container id="element-nav">
     <el-main>
       <el-menu :router="true">
         <span
@@ -46,6 +46,7 @@ export default {
           :key="id"
           @contextmenu.prevent="deleteElement({id})">
           <el-menu-item
+            class="element"
             :index="`e:${id}`"
             :route="{name: 'game', params: {gameId, id}}">
             {{title}}
@@ -54,7 +55,14 @@ export default {
       </el-menu>
     </el-main>
     <el-footer>
-      <el-button icon="el-icon-circle-plus" type="success" plain @click="$emit('create')">New Element</el-button>
+      <el-button
+        id="new-element"
+        icon="el-icon-circle-plus"
+        type="success"
+        plain
+        @click="$emit('create')">
+        New Element
+      </el-button>
     </el-footer>
   </el-container>
 </template>
