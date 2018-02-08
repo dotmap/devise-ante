@@ -59,7 +59,7 @@ export default {
     createElement () {
       const {gameId, nextElement} = this.game
       const id = `${nextElement}`
-      const elem = {id, title: `Element ${id}`, markdown: ``, tags: []}
+      const elem = {id, markdown: `# Element ${id}\n\nWrite markdown here!\n`, tags: []}
       this.game.elements.push(elem)
       this.game.nextElement++
       this.$router.push({name: 'game', params: {gameId, id}})
@@ -145,22 +145,16 @@ export default {
 
       <el-form :inline="true" :model="element" size="mini">
 
-        <router-link :to="{ name: 'game', params: {gameId: game.gameId} }">
-          <i class="el-icon-d-arrow-left"></i><i class="el-icon-setting"></i>
+        <router-link class="el-button el-button--mini el-button--info el-form-item" :to="{ name: 'game', params: {gameId: game.gameId} }">
+          <i class="el-icon-close"></i>
+          <span>Close</span>
         </router-link>
-
-        <el-form-item label="Title">
-          <el-input
-            v-model="element.title"
-            placeholder="Element Title"
-            @change="$emit('change')"/>
-        </el-form-item>
 
         <el-form-item label="Type" class="type-input">
           <el-select
             size="mini"
             default-first-option
-            placeholder="New Tag..."
+            placeholder="Choose type"
             v-model="element.typeId"
             @change="$emit('change')">
             <el-option
@@ -180,7 +174,7 @@ export default {
             reserve-keyword
             allow-create
             default-first-option
-            placeholder="New Tag..."
+            placeholder="Add tag"
             loading-text="Loading"
             no-data-text="No data"
             no-match-text="No match"
@@ -226,7 +220,7 @@ export default {
         <el-tag v-if="element.tags.length === 0" size="small" type="info">Untagged</el-tag>
       </el-form>
 
-      <edit-element :markdown="element.markdown" @edit="setMarkdown"/>
+      <edit-element :markdown="element.markdown" @edit="setMarkdown" :key="element.id"/>
     </el-main>
 
     <el-main v-else>
@@ -242,10 +236,16 @@ export default {
       overflow: inherit;
     }
     .el-main {
+      border-top: 1px solid gray;
       padding: 4px;
       background-color: rgba(0, 0, 0, 0.1);
       display: flex;
       flex-flow: column;
+      overflow-y: scroll;
+
+      .el-button {
+        text-decoration: none;
+      }
 
       .el-tag {
         margin: 2px;
@@ -257,12 +257,8 @@ export default {
         margin-top: 4px;
       }
 
-      form a {
-        margin: 0 .5rem;
-      }
-
       .el-form-item {
-        margin: 0 1rem 0 0;
+        margin: 0 .5rem 0 0;
       }
 
       .el-input, .el-select {

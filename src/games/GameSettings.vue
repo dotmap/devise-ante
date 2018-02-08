@@ -12,9 +12,6 @@ export default {
   data: () => ({
     nextType: ''
   }),
-  computed: {
-
-  },
   methods: {
     handleDelete (index, row) {
       const {game} = this
@@ -37,11 +34,13 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h1>Settings</h1>
+  <div class="settings view">
+    <h1>{{game.title}}</h1>
+    <code>{{game.orgId}}/{{game.gameId}}</code>
+    <hr>
     <el-row :gutter="20">
-
       <el-col :span="12">
+        <h4>Kinds &amp; Names</h4>
         <el-input
           placeholder="New type..."
           v-model="nextType"
@@ -67,7 +66,8 @@ export default {
       </el-col>
 
       <el-col :span="12">
-
+        <h4>Members &amp; Privacy</h4>
+        <p>Placeholder</p>
       </el-col>
 
     </el-row>
@@ -75,5 +75,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
+  .settings.view {
+    padding: 1rem;
+  }
 </style>
