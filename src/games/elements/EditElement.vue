@@ -24,8 +24,10 @@ export default {
 <style lang="scss" scoped>
   .edit-element {
     display: flex;
+
     .el-textarea {
       flex-grow: 1;
+
       /deep/ .el-textarea__inner {
         height: 100%;
         border: 0;

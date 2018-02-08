@@ -81,12 +81,15 @@ export default {
     font-family: 'Inter UI';
     src: url(./fonts/Inter-UI-Regular.woff2);
   }
+
   body {
-    font-family: 'Inter UI';
+    font-family: 'Inter UI', sans-serif;
     padding: 0;
     margin: 0;
   }
-  html, body {
+
+  html,
+  body {
     height: 100%;
   }
 </style>
@@ -96,24 +99,27 @@ export default {
     width: 100%;
     height: 100%;
     flex: initial;
+  
     .el-header {
       padding: 0;
       z-index: 1;
+
       .brand {
-        padding: 1rem 24px 0 24px;
-        font-family: 'Nunito';
+        padding: 1rem 24px 0;
+        font-family: 'Nunito', sans-serif;
         font-size: 14pt;
         position: relative;
         float: left;
         height: 60px;
         box-sizing: border-box;
       }
+
       .right {
         float: right;
       }
     }
+
     .el-container {
-      // TODO remove calc height
       height: calc(100% - 61px);
       flex: initial;
     }

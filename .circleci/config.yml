@@ -20,7 +20,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
-      - run: npx cross-env RECORD_KEY=$DEVISE_CYPRESS_TOKEN yarn test:integration
+      - run: npx cross-env RECORD_KEY=$DEVISE_CYPRESS_TOKEN yarn test
   
   deploy_staging:
     docker:
