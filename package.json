@@ -44,7 +44,7 @@
     "cypress": "^1.1.4",
     "cz-customizable": "^5.2.0",
     "eslint": "^4.13.1",
-    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard": "^11.0.0",
     "eslint-plugin-cypress": "^2.0.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^6.0.0",
